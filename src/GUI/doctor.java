@@ -8,7 +8,9 @@ import tallercontenedores.contenedor_area;
 import tallercontenedores.contenedor_doctor;
 import static GUI.area.are;
 import static GUI.area.are2;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tallercontenedores.Archivo;
 /**
  *
  * @author SENA
@@ -56,13 +58,14 @@ public class doctor extends javax.swing.JFrame {
         enviar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_doctor = new javax.swing.JTable();
+        exportar = new javax.swing.JButton();
         jLabel7 = new javax.swing.JLabel();
 
         jTextField2.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMaximumSize(new java.awt.Dimension(553, 435));
-        setMinimumSize(new java.awt.Dimension(435, 553));
+        setMinimumSize(new java.awt.Dimension(450, 450));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -132,6 +135,11 @@ public class doctor extends javax.swing.JFrame {
         modificar.setBounds(100, 190, 75, 23);
 
         buscar.setText("buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buscar);
         buscar.setBounds(210, 190, 65, 23);
 
@@ -146,7 +154,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(180, 240, 69, 23);
+        enviar.setBounds(90, 230, 69, 23);
 
         tabla_doctor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -163,6 +171,15 @@ public class doctor extends javax.swing.JFrame {
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(10, 270, 410, 130);
+
+        exportar.setText("exportar");
+        exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exportar);
+        exportar.setBounds(250, 230, 80, 23);
 
         jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondodoctor.jpg"))); // NOI18N
         getContentPane().add(jLabel7);
@@ -250,6 +267,48 @@ public class doctor extends javax.swing.JFrame {
         }
         //opcion = (String) tipo.getSelectedItem();
     }//GEN-LAST:event_tipoActionPerformed
+
+    private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
+        // TODO add your handling code here:
+        String cad="Cedula \t Nombre \t Telefono \t Tipo \t Area \n";
+        
+        for(int i =0; i<doc.size(); i++){
+        contenedor_doctor d = (contenedor_doctor)doc.get(i);
+        cad+= d.getCedeula()+ "\t" + d.getNombre() + "\t" + d.getTelefono() + "\t" + d.getGeneral() + "\t" + d.getEspecialista() + "\n";
+    
+     }
+     
+        Archivo.grabar("doctor.xls", cad);
+    }//GEN-LAST:event_exportarActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        int ced = Integer.parseInt(cedula.getText().trim());
+        
+        boolean buscar = false;
+        contenedor_doctor buscar_d = null;
+     
+        for(int i =0; i<doc.size(); i++)
+        {
+         doc2 = (contenedor_doctor)doc.get(i);
+
+         if(ced==doc2.getCedeula())
+         {
+           buscar = true;
+           break;
+         }      
+        }
+
+        if(buscar)
+        {
+          nombre.setText(doc2.getNombre());
+          telefono.setText(String.valueOf(doc2.getTelefono()));
+          tipo.setSelectedItem("general");
+          area_d.setSelectedItem("Especialista");
+        }else{
+            JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_buscarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -293,6 +352,7 @@ public class doctor extends javax.swing.JFrame {
     private javax.swing.JTextField cedula;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton enviar;
+    private javax.swing.JButton exportar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

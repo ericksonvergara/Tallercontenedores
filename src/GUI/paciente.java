@@ -54,6 +54,7 @@ public class paciente extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_paciente = new javax.swing.JTable();
         exportar = new javax.swing.JButton();
+        jLabel6 = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,20 +70,39 @@ public class paciente extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(485, 450));
+        setPreferredSize(new java.awt.Dimension(472, 378));
+        getContentPane().setLayout(null);
 
         jLabel1.setText("Cedula:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(121, 56, 37, 14);
 
         jLabel2.setText("Nombre:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(121, 94, 41, 14);
 
         jLabel3.setText("Edad:");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(121, 132, 28, 14);
 
         jLabel4.setText("Telefono:");
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(121, 170, 46, 14);
 
         cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cedulaActionPerformed(evt);
             }
         });
+        getContentPane().add(cedula);
+        cedula.setBounds(228, 53, 68, 20);
+        getContentPane().add(nombre);
+        nombre.setBounds(228, 91, 68, 20);
+        getContentPane().add(edad);
+        edad.setBounds(228, 129, 68, 20);
+        getContentPane().add(telefono);
+        telefono.setBounds(228, 167, 68, 20);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -90,6 +110,8 @@ public class paciente extends javax.swing.JFrame {
                 agregarActionPerformed(evt);
             }
         });
+        getContentPane().add(agregar);
+        agregar.setBounds(31, 193, 71, 23);
 
         modificar.setText("modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -97,6 +119,8 @@ public class paciente extends javax.swing.JFrame {
                 modificarActionPerformed(evt);
             }
         });
+        getContentPane().add(modificar);
+        modificar.setBounds(121, 193, 75, 23);
 
         buscar.setText("buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -104,6 +128,8 @@ public class paciente extends javax.swing.JFrame {
                 buscarActionPerformed(evt);
             }
         });
+        getContentPane().add(buscar);
+        buscar.setBounds(228, 193, 65, 23);
 
         eliminar.setText("eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,9 +137,13 @@ public class paciente extends javax.swing.JFrame {
                 eliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(eliminar);
+        eliminar.setBounds(320, 193, 69, 23);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("PACIENTE");
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(164, 18, 74, 17);
 
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -121,6 +151,8 @@ public class paciente extends javax.swing.JFrame {
                 enviarActionPerformed(evt);
             }
         });
+        getContentPane().add(enviar);
+        enviar.setBounds(75, 234, 69, 23);
 
         tabla_paciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -143,88 +175,21 @@ public class paciente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(tabla_paciente);
 
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 275, 452, 96);
+
         exportar.setText("Exportar");
         exportar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 exportarActionPerformed(evt);
             }
         });
+        getContentPane().add(exportar);
+        exportar.setBounds(258, 234, 75, 23);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(31, 31, 31)
-                        .addComponent(agregar)
-                        .addGap(19, 19, 19)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4)
-                            .addComponent(modificar))
-                        .addGap(32, 32, 32)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(buscar)
-                                .addGap(27, 27, 27)
-                                .addComponent(eliminar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(cedula)
-                                .addComponent(nombre)
-                                .addComponent(edad)
-                                .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 68, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(164, 164, 164)
-                        .addComponent(jLabel5))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(75, 75, 75)
-                        .addComponent(enviar)
-                        .addGap(114, 114, 114)
-                        .addComponent(exportar)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cedula, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(nombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(edad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(telefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(agregar)
-                    .addComponent(modificar)
-                    .addComponent(buscar)
-                    .addComponent(eliminar))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(enviar)
-                    .addComponent(exportar))
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21))
-        );
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente.jpg"))); // NOI18N
+        getContentPane().add(jLabel6);
+        jLabel6.setBounds(0, 0, 470, 420);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -377,6 +342,7 @@ public class paciente extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

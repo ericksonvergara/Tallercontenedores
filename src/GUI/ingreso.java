@@ -9,7 +9,9 @@ import java.text.DateFormat;
 import tallercontenedores.contenedor_ingreso;
 import tallercontenedores.contenedor_paciente;
 import java.text.*;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tallercontenedores.Archivo;
 
 
 /**
@@ -55,11 +57,12 @@ public class ingreso extends javax.swing.JFrame {
         enviar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_ingreso = new javax.swing.JTable();
+        exportar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMinimumSize(new java.awt.Dimension(617, 526));
+        setMinimumSize(new java.awt.Dimension(500, 450));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -96,7 +99,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(80, 200, 80, 23);
+        buscar.setBounds(50, 200, 80, 23);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -105,7 +108,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(190, 200, 71, 23);
+        agregar.setBounds(160, 200, 71, 23);
 
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -114,7 +117,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(290, 200, 69, 23);
+        enviar.setBounds(260, 200, 69, 23);
 
         tabla_ingreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -138,11 +141,20 @@ public class ingreso extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabla_ingreso);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(30, 290, 452, 100);
+        jScrollPane2.setBounds(10, 250, 452, 100);
+
+        exportar.setText("exportar");
+        exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exportar);
+        exportar.setBounds(350, 200, 80, 23);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoIngreso.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(0, -20, 520, 470);
+        jLabel3.setBounds(0, 0, 520, 410);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -169,7 +181,7 @@ public class ingreso extends javax.swing.JFrame {
         {
         nombre.setText(pac2.getNombre());
         }else{
-            
+             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE); 
         }
         
         
@@ -198,7 +210,7 @@ public class ingreso extends javax.swing.JFrame {
         contenedor_ingreso ing = new contenedor_ingreso(ced, nom, fecha_i.getDate());
         ingreso.add(ing);
      }else{
-            
+          
         }
         cedula.setText(null);
         nombre.setText(nombre_paciente);
@@ -224,6 +236,19 @@ public class ingreso extends javax.swing.JFrame {
              model.setValueAt(formato1.format(ingre.getFecha_ingreso()), con, 2);
         }
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
+        // TODO add your handling code here:
+         // TODO add your handling code here:
+        String cad="Cedula \t Nombre \t Fecha de ingreso \n";
+        
+        for(int i =0; i<ingreso.size(); i++){
+        contenedor_ingreso ingr = (contenedor_ingreso)ingreso.get(i);
+        cad+= ingr.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingr.getFecha_ingreso()) + "\n";    
+     }
+     
+        Archivo.grabar("ingreso.xls", cad);
+    }//GEN-LAST:event_exportarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -265,6 +290,7 @@ public class ingreso extends javax.swing.JFrame {
     private javax.swing.JButton buscar;
     private javax.swing.JTextField cedula;
     private javax.swing.JButton enviar;
+    private javax.swing.JButton exportar;
     private com.toedter.calendar.JDateChooser fecha_i;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

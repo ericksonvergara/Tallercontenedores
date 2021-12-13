@@ -7,6 +7,7 @@ package GUI;
 
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import tallercontenedores.Archivo;
 import tallercontenedores.contenedor_area;
 
 
@@ -47,20 +48,32 @@ private DefaultTableModel model;
         jLabel3 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_area = new javax.swing.JTable();
+        exportar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setMinimumSize(new java.awt.Dimension(500, 500));
+        getContentPane().setLayout(null);
 
         jLabel1.setText("especialidad:");
+        getContentPane().add(jLabel1);
+        jLabel1.setBounds(91, 124, 62, 14);
 
         jLabel2.setText("Id:");
+        getContentPane().add(jLabel2);
+        jLabel2.setBounds(91, 77, 14, 14);
 
         nombreArea.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombreAreaActionPerformed(evt);
             }
         });
+        getContentPane().add(nombreArea);
+        nombreArea.setBounds(171, 121, 180, 20);
+        getContentPane().add(idea);
+        idea.setBounds(171, 74, 180, 20);
 
         Agregar.setText("Agregar");
         Agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -68,6 +81,8 @@ private DefaultTableModel model;
                 AgregarActionPerformed(evt);
             }
         });
+        getContentPane().add(Agregar);
+        Agregar.setBounds(22, 190, 71, 23);
 
         Modificar.setText("Modificar");
         Modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -75,6 +90,8 @@ private DefaultTableModel model;
                 ModificarActionPerformed(evt);
             }
         });
+        getContentPane().add(Modificar);
+        Modificar.setBounds(119, 190, 75, 23);
 
         Buscar.setText("Buscar");
         Buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -82,6 +99,8 @@ private DefaultTableModel model;
                 BuscarActionPerformed(evt);
             }
         });
+        getContentPane().add(Buscar);
+        Buscar.setBounds(223, 190, 65, 23);
 
         Eliminar.setText("Eliminar");
         Eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -89,6 +108,8 @@ private DefaultTableModel model;
                 EliminarActionPerformed(evt);
             }
         });
+        getContentPane().add(Eliminar);
+        Eliminar.setBounds(323, 190, 69, 23);
 
         Mostrar.setText("Mostrar");
         Mostrar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,9 +117,13 @@ private DefaultTableModel model;
                 MostrarActionPerformed(evt);
             }
         });
+        getContentPane().add(Mostrar);
+        Mostrar.setBounds(70, 230, 69, 23);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setText("AREA");
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(209, 29, 39, 17);
 
         tabla_area.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -121,64 +146,21 @@ private DefaultTableModel model;
         });
         jScrollPane2.setViewportView(tabla_area);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(nombreArea)
-                            .addComponent(idea, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(191, 191, 191)
-                        .addComponent(Mostrar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addComponent(Agregar)
-                        .addGap(26, 26, 26)
-                        .addComponent(Modificar)
-                        .addGap(29, 29, 29)
-                        .addComponent(Buscar)
-                        .addGap(35, 35, 35)
-                        .addComponent(Eliminar))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(209, 209, 209)
-                        .addComponent(jLabel3))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(29, 29, 29)
-                .addComponent(jLabel3)
-                .addGap(28, 28, 28)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(idea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(nombreArea, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(49, 49, 49)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Agregar)
-                    .addComponent(Modificar)
-                    .addComponent(Buscar)
-                    .addComponent(Eliminar))
-                .addGap(18, 18, 18)
-                .addComponent(Mostrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(10, 260, 452, 103);
+
+        exportar.setText("exportar");
+        exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarActionPerformed(evt);
+            }
+        });
+        getContentPane().add(exportar);
+        exportar.setBounds(250, 230, 80, 23);
+
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoarea.jpg"))); // NOI18N
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(-90, -10, 690, 710);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -258,6 +240,19 @@ private DefaultTableModel model;
        nombreArea.setText(""); idea.setText(""); 
     }//GEN-LAST:event_EliminarActionPerformed
 
+    private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
+        // TODO add your handling code here:
+         String cad="ID \t Nombre \n";
+        
+        for(int i =0; i<are.size(); i++){
+        contenedor_area a = (contenedor_area)are.get(i);
+        cad+= a.getId()+ "\t" + a.getNombreA() + "\n";
+    
+     }
+     
+        Archivo.grabar("area.xls", cad);
+    }//GEN-LAST:event_exportarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -299,10 +294,12 @@ private DefaultTableModel model;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Modificar;
     private javax.swing.JButton Mostrar;
+    private javax.swing.JButton exportar;
     private javax.swing.JTextField idea;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nombreArea;
