@@ -68,7 +68,7 @@ public class doctor extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("DOCTOR");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(170, 0, 66, 17);
+        jLabel1.setBounds(170, 0, 61, 17);
 
         jLabel2.setText("Cedula:");
         getContentPane().add(jLabel2);
@@ -99,7 +99,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 96, 23);
+        tipo.setBounds(190, 130, 80, 20);
 
         jLabel6.setText("Area:");
         getContentPane().add(jLabel6);
@@ -111,7 +111,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 23);
+        area_d.setBounds(190, 160, 80, 20);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +120,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(10, 190, 79, 24);
+        agregar.setBounds(10, 190, 71, 23);
 
         modificar.setText("modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,15 +129,15 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(100, 190, 87, 24);
+        modificar.setBounds(100, 190, 75, 23);
 
         buscar.setText("buscar");
         getContentPane().add(buscar);
-        buscar.setBounds(210, 190, 73, 24);
+        buscar.setBounds(210, 190, 65, 23);
 
         eliminar.setText("eliminar");
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 190, 80, 24);
+        eliminar.setBounds(320, 190, 69, 23);
 
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -146,7 +146,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(180, 240, 80, 24);
+        enviar.setBounds(180, 240, 69, 23);
 
         tabla_doctor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {

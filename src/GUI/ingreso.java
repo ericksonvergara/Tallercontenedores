@@ -8,6 +8,8 @@ import static GUI.paciente.pac2;
 import java.text.DateFormat;
 import tallercontenedores.contenedor_ingreso;
 import tallercontenedores.contenedor_paciente;
+import java.text.*;
+import javax.swing.table.DefaultTableModel;
 
 
 /**
@@ -17,6 +19,7 @@ import tallercontenedores.contenedor_paciente;
 public class ingreso extends javax.swing.JFrame {
     public static java.util.ArrayList ingreso = new java.util.ArrayList();
     public static contenedor_ingreso ingreso2 = null;
+    private DefaultTableModel model;
     
     public static String formato = "dd/MMM/yyyy";
     public static String fecha;
@@ -48,38 +51,39 @@ public class ingreso extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         nombre = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        datos = new javax.swing.JTextPane();
         agregar = new javax.swing.JButton();
         enviar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_ingreso = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(626, 417));
         setMinimumSize(new java.awt.Dimension(617, 526));
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("INGRESO DEL PACIENTE");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(131, 24, 182, 17);
+        jLabel1.setBounds(131, 24, 176, 17);
+
+        fecha_i.setMinSelectableDate(new java.util.Date(-62135747899000L));
         getContentPane().add(fecha_i);
-        fecha_i.setBounds(227, 137, 66, 19);
+        fecha_i.setBounds(227, 137, 81, 20);
 
         jLabel2.setText("Fecha ingreso:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(138, 143, 83, 14);
+        jLabel2.setBounds(138, 143, 71, 14);
 
         jLabel4.setText("Cedula: ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 83, 46, 14);
+        jLabel4.setBounds(10, 83, 40, 14);
         getContentPane().add(cedula);
         cedula.setBounds(68, 80, 90, 20);
 
         jLabel5.setText("Nombre:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(166, 83, 49, 14);
+        jLabel5.setBounds(166, 83, 41, 14);
 
         nombre.setEditable(false);
         getContentPane().add(nombre);
@@ -92,12 +96,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(80, 200, 80, 24);
-
-        jScrollPane1.setViewportView(datos);
-
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(20, 250, 429, 138);
+        buscar.setBounds(80, 200, 80, 23);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -106,7 +105,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(190, 200, 79, 24);
+        agregar.setBounds(190, 200, 71, 23);
 
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -115,7 +114,31 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(290, 200, 80, 24);
+        enviar.setBounds(290, 200, 69, 23);
+
+        tabla_ingreso.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "Cedula", "Nombre", "Fecha de ingreso"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(tabla_ingreso);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(30, 290, 452, 100);
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoIngreso.jpg"))); // NOI18N
         getContentPane().add(jLabel3);
@@ -154,7 +177,8 @@ public class ingreso extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());        
+        int ced = Integer.parseInt(cedula.getText().trim());
+        String nombre_paciente = pac2.getNombre().trim();
         boolean saber = false;
         contenedor_ingreso ingreso_a = null;
      
@@ -177,18 +201,27 @@ public class ingreso extends javax.swing.JFrame {
             
         }
         cedula.setText(null);
-        nombre.setText(ingreso2.getNombre_paciente());
+        nombre.setText(nombre_paciente);
         fecha_i.setDate(null);
         
     }//GEN-LAST:event_agregarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
-        datos.setText(null);
-        
+        //datos.setText(null);
+        String data[][]={};
+        String col[] = {"CEDULA", "NOMBRE","Fecha ingreso"};
+        model = new DefaultTableModel(data,col);
+         tabla_ingreso.setModel(model);
+         int con=0;
+        formato1 = DateFormat.getDateInstance();
         for (int i = 0; i<ingreso.size(); i++){
             contenedor_ingreso ingre = (contenedor_ingreso) ingreso.get(i);
-            datos.setText( datos.getText() + ingre.getCedula() + "\t" + ingre.getNombre_paciente() + "\t" + ingre.getFecha_ingreso() + "\n" );
+            //datos.setText( datos.getText() + ingre.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingre.getFecha_ingreso()) + "\n" );
+             model.insertRow(con,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+             model.setValueAt(ingre.getCedula(), con, 0);
+             model.setValueAt(pac2.getNombre(), con, 1);
+             model.setValueAt(formato1.format(ingre.getFecha_ingreso()), con, 2);
         }
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -231,7 +264,6 @@ public class ingreso extends javax.swing.JFrame {
     private javax.swing.JButton agregar;
     private javax.swing.JButton buscar;
     private javax.swing.JTextField cedula;
-    private javax.swing.JTextPane datos;
     private javax.swing.JButton enviar;
     private com.toedter.calendar.JDateChooser fecha_i;
     private javax.swing.JLabel jLabel1;
@@ -240,7 +272,8 @@ public class ingreso extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private com.toedter.calendar.JMonthChooserBeanInfo jMonthChooserBeanInfo1;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTextField nombre;
+    private javax.swing.JTable tabla_ingreso;
     // End of variables declaration//GEN-END:variables
 }
