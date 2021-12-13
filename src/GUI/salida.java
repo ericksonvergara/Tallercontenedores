@@ -176,19 +176,19 @@ public class salida extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Cedula Paciente", "Nombre Paciente", "Nombre  Doctor", "Cedula Doctor", "Tipo Doctor", "Especialidad", "Estado Paciente", "Fecha ingreso", "Fecha salida", "Total"
             }
         ));
         jScrollPane2.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(40, 390, 530, 100);
+        jScrollPane2.setBounds(10, 390, 560, 120);
 
         jCheckBox1.setText("Cuidados intensivos");
         getContentPane().add(jCheckBox1);
