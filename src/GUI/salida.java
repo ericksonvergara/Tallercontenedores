@@ -29,29 +29,34 @@ public class salida extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
-        jTextField2 = new javax.swing.JTextField();
+        cedula_paciente = new javax.swing.JTextField();
+        nombre_paciente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        fecha_ingreso = new com.toedter.calendar.JDateChooser();
+        modificar = new javax.swing.JButton();
+        agregar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
-        jDateChooser2 = new com.toedter.calendar.JDateChooser();
+        fecha_salida = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        cedula_doctor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        jTextField4 = new javax.swing.JTextField();
+        nombre_doctor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
-        jTextField5 = new javax.swing.JTextField();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        datos = new javax.swing.JTextArea();
-        jTextField6 = new javax.swing.JTextField();
-        jTextField7 = new javax.swing.JTextField();
+        total = new javax.swing.JTextField();
+        buscar = new javax.swing.JButton();
+        eliminar = new javax.swing.JButton();
+        enviar = new javax.swing.JButton();
+        area_doctor = new javax.swing.JTextField();
+        tipo_doctor = new javax.swing.JTextField();
+        exportar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jCheckBox1 = new javax.swing.JCheckBox();
+        jLabel12 = new javax.swing.JLabel();
+        jCheckBox2 = new javax.swing.JCheckBox();
+        jCheckBox3 = new javax.swing.JCheckBox();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -63,105 +68,144 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel2);
         jLabel2.setBounds(273, 11, 139, 18);
 
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText("cedula del paciente:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(20, 70, 100, 14);
+        jLabel1.setBounds(20, 70, 120, 14);
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel3.setText("Nombre del paciente:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(310, 70, 102, 14);
-        getContentPane().add(jTextField1);
-        jTextField1.setBounds(130, 70, 158, 20);
+        jLabel3.setBounds(310, 70, 119, 14);
+        getContentPane().add(cedula_paciente);
+        cedula_paciente.setBounds(138, 70, 150, 20);
 
-        jTextField2.setEditable(false);
-        jTextField2.addActionListener(new java.awt.event.ActionListener() {
+        nombre_paciente.setEditable(false);
+        nombre_paciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField2ActionPerformed(evt);
+                nombre_pacienteActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField2);
-        jTextField2.setBounds(420, 70, 142, 20);
+        getContentPane().add(nombre_paciente);
+        nombre_paciente.setBounds(430, 70, 150, 20);
 
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Fecha de ingreso:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 95, 14);
-        getContentPane().add(jDateChooser1);
-        jDateChooser1.setBounds(130, 110, 158, 20);
+        jLabel4.setBounds(20, 110, 110, 14);
+        getContentPane().add(fecha_ingreso);
+        fecha_ingreso.setBounds(138, 110, 150, 20);
 
-        jButton1.setText("Modificar");
-        getContentPane().add(jButton1);
-        jButton1.setBounds(140, 280, 75, 23);
+        modificar.setText("Modificar");
+        getContentPane().add(modificar);
+        modificar.setBounds(140, 330, 75, 23);
 
-        jButton2.setText("Agregar");
-        getContentPane().add(jButton2);
-        jButton2.setBounds(40, 280, 71, 23);
+        agregar.setText("Agregar");
+        getContentPane().add(agregar);
+        agregar.setBounds(40, 330, 71, 23);
 
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Fecha de salida:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(310, 110, 81, 20);
-        getContentPane().add(jDateChooser2);
-        jDateChooser2.setBounds(420, 110, 142, 20);
+        jLabel5.setBounds(310, 110, 100, 20);
+        getContentPane().add(fecha_salida);
+        fecha_salida.setBounds(430, 110, 150, 20);
 
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(310, 150, 93, 14);
-        getContentPane().add(jTextField3);
-        jTextField3.setBounds(130, 150, 158, 20);
+        jLabel6.setBounds(310, 150, 108, 14);
+        getContentPane().add(cedula_doctor);
+        cedula_doctor.setBounds(138, 150, 150, 20);
 
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel7.setText("Cedula del Doctor:");
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(20, 150, 94, 14);
+        jLabel7.setBounds(20, 150, 110, 14);
 
-        jTextField4.setEditable(false);
-        getContentPane().add(jTextField4);
-        jTextField4.setBounds(420, 150, 142, 20);
+        nombre_doctor.setEditable(false);
+        getContentPane().add(nombre_doctor);
+        nombre_doctor.setBounds(430, 150, 150, 20);
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Tipo:");
         getContentPane().add(jLabel8);
         jLabel8.setBounds(90, 190, 37, 14);
 
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel9.setText("Area:");
         getContentPane().add(jLabel9);
-        jLabel9.setBounds(370, 180, 27, 20);
+        jLabel9.setBounds(370, 180, 30, 20);
 
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel10.setText("Valor a pagar");
         getContentPane().add(jLabel10);
-        jLabel10.setBounds(190, 230, 64, 14);
+        jLabel10.setBounds(190, 280, 80, 14);
 
-        jTextField5.addActionListener(new java.awt.event.ActionListener() {
+        total.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField5ActionPerformed(evt);
+                totalActionPerformed(evt);
             }
         });
-        getContentPane().add(jTextField5);
-        jTextField5.setBounds(320, 230, 76, 20);
+        getContentPane().add(total);
+        total.setBounds(320, 280, 76, 20);
 
-        jButton3.setText("Buscar");
-        getContentPane().add(jButton3);
-        jButton3.setBounds(230, 280, 65, 23);
+        buscar.setText("Buscar");
+        getContentPane().add(buscar);
+        buscar.setBounds(230, 330, 65, 23);
 
-        jButton4.setText("Eliminar");
-        getContentPane().add(jButton4);
-        jButton4.setBounds(320, 280, 69, 23);
+        eliminar.setText("Eliminar");
+        getContentPane().add(eliminar);
+        eliminar.setBounds(320, 330, 69, 23);
 
-        jButton5.setText("Mostrar");
-        getContentPane().add(jButton5);
-        jButton5.setBounds(410, 280, 69, 23);
+        enviar.setText("Mostrar");
+        getContentPane().add(enviar);
+        enviar.setBounds(410, 330, 69, 23);
 
-        datos.setColumns(20);
-        datos.setRows(5);
-        jScrollPane1.setViewportView(datos);
+        area_doctor.setEditable(false);
+        getContentPane().add(area_doctor);
+        area_doctor.setBounds(430, 180, 150, 20);
 
-        getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(60, 320, 497, 186);
+        tipo_doctor.setEditable(false);
+        getContentPane().add(tipo_doctor);
+        tipo_doctor.setBounds(130, 190, 158, 20);
 
-        jTextField6.setEditable(false);
-        getContentPane().add(jTextField6);
-        jTextField6.setBounds(420, 180, 142, 20);
+        exportar.setText("exportar");
+        getContentPane().add(exportar);
+        exportar.setBounds(500, 330, 80, 23);
 
-        jTextField7.setEditable(false);
-        getContentPane().add(jTextField7);
-        jTextField7.setBounds(130, 190, 158, 20);
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane2);
+        jScrollPane2.setBounds(40, 390, 530, 100);
+
+        jCheckBox1.setText("Cuidados intensivos");
+        getContentPane().add(jCheckBox1);
+        jCheckBox1.setBounds(390, 240, 121, 23);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel12.setText("Estado del paciente:");
+        getContentPane().add(jLabel12);
+        jLabel12.setBounds(20, 250, 130, 15);
+
+        jCheckBox2.setText("Observacion");
+        getContentPane().add(jCheckBox2);
+        jCheckBox2.setBounds(160, 240, 90, 23);
+
+        jCheckBox3.setText("Tratamiento");
+        getContentPane().add(jCheckBox3);
+        jCheckBox3.setBounds(270, 240, 90, 23);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondosalida.jpg"))); // NOI18N
         getContentPane().add(jLabel11);
@@ -170,13 +214,13 @@ public class salida extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField5ActionPerformed
+    private void totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField5ActionPerformed
+    }//GEN-LAST:event_totalActionPerformed
 
-    private void jTextField2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField2ActionPerformed
+    private void nombre_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_pacienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField2ActionPerformed
+    }//GEN-LAST:event_nombre_pacienteActionPerformed
 
     /**
      * @param args the command line arguments
@@ -214,17 +258,23 @@ public class salida extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextArea datos;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
-    private com.toedter.calendar.JDateChooser jDateChooser2;
+    private javax.swing.JButton agregar;
+    private javax.swing.JTextField area_doctor;
+    private javax.swing.JButton buscar;
+    private javax.swing.JTextField cedula_doctor;
+    private javax.swing.JTextField cedula_paciente;
+    private javax.swing.JButton eliminar;
+    private javax.swing.JButton enviar;
+    private javax.swing.JButton exportar;
+    private com.toedter.calendar.JDateChooser fecha_ingreso;
+    private com.toedter.calendar.JDateChooser fecha_salida;
+    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -233,13 +283,12 @@ public class salida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
+    private javax.swing.JButton modificar;
+    private javax.swing.JTextField nombre_doctor;
+    private javax.swing.JTextField nombre_paciente;
+    private javax.swing.JTextField tipo_doctor;
+    private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }
