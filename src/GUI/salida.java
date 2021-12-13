@@ -4,11 +4,15 @@
  */
 package GUI;
 
+
+
 /**
  *
  * @author SENA
  */
 public class salida extends javax.swing.JFrame {
+    public static java.util.ArrayList salida = new java.util.ArrayList();
+    
 
     /**
      * Creates new form salida
@@ -151,6 +155,11 @@ public class salida extends javax.swing.JFrame {
         total.setBounds(320, 280, 76, 20);
 
         buscar.setText("Buscar");
+        buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscarActionPerformed(evt);
+            }
+        });
         getContentPane().add(buscar);
         buscar.setBounds(230, 330, 65, 23);
 
@@ -221,6 +230,32 @@ public class salida extends javax.swing.JFrame {
     private void nombre_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_pacienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombre_pacienteActionPerformed
+
+    private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
+        // TODO add your handling code here:
+        int ced = Integer.parseInt(cedula_paciente.getText().trim());
+        
+        boolean buscar = false;
+        //contenedor_ingreso in = null;
+     
+        for(int i =0; i<pac.size(); i++)
+        {
+         pac2 = (contenedor_paciente)pac.get(i);
+
+         if(ced==pac2.getCedula())
+         {
+           buscar = true;
+           break;
+         }      
+        }
+
+        if(buscar)
+        {
+        nombre.setText(pac2.getNombre());
+        }else{
+             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE); 
+        }
+    }//GEN-LAST:event_buscarActionPerformed
 
     /**
      * @param args the command line arguments
