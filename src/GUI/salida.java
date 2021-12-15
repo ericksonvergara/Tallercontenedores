@@ -4,6 +4,19 @@
  */
 package GUI;
 
+import static GUI.area.are;
+import static GUI.doctor.doc;
+import javax.swing.JOptionPane;
+import tallercontenedores.contenedor_salida;
+import tallercontenedores.contenedor_ingreso;
+import static GUI.ingreso.ingreso;
+import static GUI.ingreso.ingreso2;
+import static GUI.paciente.pac;
+import static GUI.paciente.pac2;
+import tallercontenedores.contenedor_area;
+import tallercontenedores.contenedor_doctor;
+import tallercontenedores.contenedor_paciente;
+
 
 
 /**
@@ -12,6 +25,7 @@ package GUI;
  */
 public class salida extends javax.swing.JFrame {
     public static java.util.ArrayList salida = new java.util.ArrayList();
+    public static contenedor_salida salida2 = null;
     
 
     /**
@@ -44,7 +58,6 @@ public class salida extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         cedula_doctor = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        nombre_doctor = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
@@ -61,6 +74,7 @@ public class salida extends javax.swing.JFrame {
         jLabel12 = new javax.swing.JLabel();
         jCheckBox2 = new javax.swing.JCheckBox();
         jCheckBox3 = new javax.swing.JCheckBox();
+        nombre_doctor = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -98,13 +112,18 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 110, 110, 14);
         getContentPane().add(fecha_ingreso);
-        fecha_ingreso.setBounds(138, 110, 150, 20);
+        fecha_ingreso.setBounds(138, 110, 150, 22);
 
         modificar.setText("Modificar");
         getContentPane().add(modificar);
         modificar.setBounds(140, 330, 75, 23);
 
         agregar.setText("Agregar");
+        agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarActionPerformed(evt);
+            }
+        });
         getContentPane().add(agregar);
         agregar.setBounds(40, 330, 71, 23);
 
@@ -113,7 +132,7 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel5);
         jLabel5.setBounds(310, 110, 100, 20);
         getContentPane().add(fecha_salida);
-        fecha_salida.setBounds(430, 110, 150, 20);
+        fecha_salida.setBounds(430, 110, 150, 22);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
@@ -126,10 +145,6 @@ public class salida extends javax.swing.JFrame {
         jLabel7.setText("Cedula del Doctor:");
         getContentPane().add(jLabel7);
         jLabel7.setBounds(20, 150, 110, 14);
-
-        nombre_doctor.setEditable(false);
-        getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(430, 150, 150, 20);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setText("Tipo:");
@@ -216,6 +231,15 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jCheckBox3);
         jCheckBox3.setBounds(270, 240, 90, 23);
 
+        nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombre_doctorActionPerformed(evt);
+            }
+        });
+        getContentPane().add(nombre_doctor);
+        nombre_doctor.setBounds(430, 140, 150, 20);
+
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondosalida.jpg"))); // NOI18N
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 630, 600);
@@ -236,13 +260,14 @@ public class salida extends javax.swing.JFrame {
         int ced = Integer.parseInt(cedula_paciente.getText().trim());
         
         boolean buscar = false;
+        contenedor_ingreso ingreso_s = null;
         //contenedor_ingreso in = null;
      
-        for(int i =0; i<pac.size(); i++)
+        for(int i =0; i<ingreso.size(); i++)
         {
-         pac2 = (contenedor_paciente)pac.get(i);
+         ingreso2 = (contenedor_ingreso)ingreso.get(i);
 
-         if(ced==pac2.getCedula())
+         if(ced==ingreso2.getCedula())
          {
            buscar = true;
            break;
@@ -251,11 +276,48 @@ public class salida extends javax.swing.JFrame {
 
         if(buscar)
         {
-        nombre.setText(pac2.getNombre());
+        nombre_paciente.setText(pac2.getNombre());
+        fecha_ingreso.setDate(ingreso2.getFecha_ingreso());        
         }else{
              JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE); 
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
+        int ced = Integer.parseInt(cedula_paciente.getText().trim());
+        String nombre_paciente = pac2.getNombre().trim();
+        boolean saber = false;
+        contenedor_salida salida_a = null;
+     
+        for(int i =0; i<ingreso.size(); i++)
+        {
+        ingreso2=(contenedor_ingreso)ingreso.get(i);
+      
+        if(ced==ingreso2.getCedula());
+        {
+        saber = true;
+        break;
+      }      
+     }
+        if(saber)
+        {
+        fecha_salida.setDate(salida2.getFecha_salida());
+        String nombre = (String) nombre_doctor.getSelectedItem();
+        //contenedor_salida sali = new contenedor_ingreso();
+        //salida.add(sali);
+     }else{
+          
+        }
+        //cedula.setText(null);
+        //nombre.setText(nombre_paciente);
+        //fecha_i.setDate(null);
+    }//GEN-LAST:event_agregarActionPerformed
+
+    private void nombre_doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_doctorActionPerformed
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_nombre_doctorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -321,7 +383,7 @@ public class salida extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
     private javax.swing.JButton modificar;
-    private javax.swing.JTextField nombre_doctor;
+    private javax.swing.JComboBox<String> nombre_doctor;
     private javax.swing.JTextField nombre_paciente;
     private javax.swing.JTextField tipo_doctor;
     private javax.swing.JTextField total;
