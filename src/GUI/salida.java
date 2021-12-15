@@ -231,14 +231,13 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jCheckBox3);
         jCheckBox3.setBounds(270, 240, 90, 23);
 
-        nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_doctorActionPerformed(evt);
             }
         });
         getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(430, 140, 150, 20);
+        nombre_doctor.setBounds(430, 140, 150, 22);
 
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondosalida.jpg"))); // NOI18N
         getContentPane().add(jLabel11);
@@ -316,6 +315,16 @@ public class salida extends javax.swing.JFrame {
 
     private void nombre_doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_doctorActionPerformed
         // TODO add your handling code here:
+        contenedor_doctor sali2= null;
+        String oper=(String)nombre_doctor.getSelectedItem();
+       
+            nombre_doctor.removeAllItems();
+        for(int i=0; i<doctor.doc.size();i++)
+        {   sali2=(contenedor_doctor)doc.get(i);
+            nombre_doctor.addItem(sali2.getNombre());
+            }
+       
+        
         
     }//GEN-LAST:event_nombre_doctorActionPerformed
 
