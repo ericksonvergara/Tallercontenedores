@@ -102,7 +102,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 80, 20);
+        tipo.setBounds(190, 130, 81, 20);
 
         jLabel6.setText("Area:");
         getContentPane().add(jLabel6);
@@ -114,7 +114,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 20);
+        area_d.setBounds(190, 160, 80, 22);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
