@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+import metodo_SQL.metodos_SQL;
+
 /**
  *
  * @author ERICK
@@ -13,10 +16,13 @@ public class Registrar extends javax.swing.JFrame {
     /**
      * Creates new form Registrar
      */
+    
     public Registrar() {
         initComponents();
         setLocationRelativeTo(null);
     }
+    
+    metodos_SQL metodos = new metodos_SQL();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -38,7 +44,7 @@ public class Registrar extends javax.swing.JFrame {
         correo_registro = new javax.swing.JTextField();
         telefono_registro = new javax.swing.JTextField();
         contraseña_registro = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
+        btn_registrar = new javax.swing.JButton();
         btn_cancelar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -61,8 +67,13 @@ public class Registrar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel6.setText("Contraseña:");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("REGISTRAR");
+        btn_registrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_registrar.setText("REGISTRAR");
+        btn_registrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_registrarActionPerformed(evt);
+            }
+        });
 
         btn_cancelar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_cancelar.setText("CANCELAR");
@@ -96,7 +107,7 @@ public class Registrar extends javax.swing.JFrame {
                                 .addComponent(contraseña_registro, javax.swing.GroupLayout.DEFAULT_SIZE, 170, Short.MAX_VALUE)))
                         .addGroup(layout.createSequentialGroup()
                             .addGap(78, 78, 78)
-                            .addComponent(jButton1)
+                            .addComponent(btn_registrar)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
                             .addComponent(btn_cancelar)))
                     .addGroup(layout.createSequentialGroup()
@@ -131,7 +142,7 @@ public class Registrar extends javax.swing.JFrame {
                     .addComponent(contraseña_registro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
+                    .addComponent(btn_registrar)
                     .addComponent(btn_cancelar))
                 .addContainerGap())
         );
@@ -143,6 +154,20 @@ public class Registrar extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.dispose();
     }//GEN-LAST:event_btn_cancelarActionPerformed
+
+    private void btn_registrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_registrarActionPerformed
+        // TODO add your handling code here:
+        //int documento = Integer.parseInt(documento_registro.getText().trim());
+        //int telefono = Integer.parseInt(telefono_registro.getText().trim());
+        int i = metodos.guardar(nombre_registro.getText(), documento_registro.getText(), correo_registro.getText(), telefono_registro.getText(), contraseña_registro.getText());
+        
+        if(i > 0){
+            JOptionPane.showMessageDialog(this, "Registro Exitoso!");
+        }else{
+            JOptionPane.showMessageDialog(this, "¡ERROR!");
+        }
+        this.dispose();
+    }//GEN-LAST:event_btn_registrarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,10 +206,10 @@ public class Registrar extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_cancelar;
+    private javax.swing.JButton btn_registrar;
     private javax.swing.JPasswordField contraseña_registro;
     private javax.swing.JTextField correo_registro;
     private javax.swing.JTextField documento_registro;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

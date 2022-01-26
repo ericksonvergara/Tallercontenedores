@@ -4,23 +4,32 @@
  */
 package metodo_SQL;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
 /**
  *
  * @author ERICK
  */
 public class ConexionBD {
-    public static String url = "";
-    public static String usuario =  "";
-    public static String contraseña = "";
+    public static String url = "jdbc:postgresql://localhost:5432/login_bd";
+    public static String usuario =  "postgres";
+    public static String contraseña = "1705";
     public static String clase = "org.postgresql.Driver";
     
-    public static connection conectar(){
-        connection conexion = null;
+    public static Connection conectar(){
+        Connection conexion = null;
         
         try {
             Class.forName(clase);
-        } catch (Exception e) {
+            conexion = (Connection) DriverManager.getConnection(url,usuario,contraseña);
+            System.out.println("Conexion Establecida");
+        } catch (ClassNotFoundException | SQLException e) {
+            
+            System.out.println(e);
         }
+        return conexion;
     }
     
 }

@@ -4,6 +4,9 @@
  */
 package GUI;
 
+import javax.swing.JOptionPane;
+import metodo_SQL.metodos_SQL;
+
 /**
  *
  * @author ERICK
@@ -17,6 +20,8 @@ public class Login extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
     }
+    
+    metodos_SQL metodos = new metodos_SQL();
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -30,7 +35,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btn_enviar = new javax.swing.JButton();
         btn_registrarse = new javax.swing.JButton();
         usuario = new javax.swing.JTextField();
         contraseña_login = new javax.swing.JPasswordField();
@@ -46,8 +51,13 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         jLabel3.setText("Contraseña:");
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton1.setText("LOGIN");
+        btn_enviar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btn_enviar.setText("LOGIN");
+        btn_enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_enviarActionPerformed(evt);
+            }
+        });
 
         btn_registrarse.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         btn_registrarse.setText("REGISTRARSE");
@@ -65,7 +75,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(75, 75, 75)
-                        .addComponent(jButton1)
+                        .addComponent(btn_enviar)
                         .addGap(51, 51, 51)
                         .addComponent(btn_registrarse))
                     .addGroup(layout.createSequentialGroup()
@@ -101,7 +111,7 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton1)
+                            .addComponent(btn_enviar)
                             .addComponent(btn_registrarse))
                         .addGap(32, 32, 32))))
         );
@@ -115,6 +125,25 @@ public class Login extends javax.swing.JFrame {
         ventana.setVisible(true);
         //this.dispose();
     }//GEN-LAST:event_btn_registrarseActionPerformed
+
+    private void btn_enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_enviarActionPerformed
+        // TODO add your handling code here:
+        String busqueda_usuario = metodos.buscarUsuarioRegistrado(usuario.getText(), contraseña_login.getText());
+        
+        if(usuario.getText().equals("postgres") && contraseña_login.getText().equals("1705")){            
+            JOptionPane.showMessageDialog(this, "Bienvenid@! (Administrador)");
+            Principal ventana = new Principal();
+            this.dispose();
+        }else if (busqueda_usuario.equals("Usuario Encontrado")){
+            String busqueda_documento = metodos.buscarDocumento(usuario.getText());
+            JOptionPane.showMessageDialog(this, "Bienvenid@!");
+            Principal ventana = new Principal();
+            this.dispose();
+        }else{
+            JOptionPane.showMessageDialog(this, "Usuario No Registrado!");
+        }
+        
+    }//GEN-LAST:event_btn_enviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,9 +181,9 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btn_enviar;
     private javax.swing.JButton btn_registrarse;
     private javax.swing.JPasswordField contraseña_login;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
