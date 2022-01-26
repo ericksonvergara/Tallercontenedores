@@ -133,11 +133,13 @@ public class Login extends javax.swing.JFrame {
         if(usuario.getText().equals("postgres") && contraseña_login.getText().equals("1705")){            
             JOptionPane.showMessageDialog(this, "Bienvenid@! (Administrador)");
             Principal ventana = new Principal();
+            ventana.setVisible(true);
             this.dispose();
         }else if (busqueda_usuario.equals("Usuario Encontrado")){
             String busqueda_documento = metodos.buscarDocumento(usuario.getText());
             JOptionPane.showMessageDialog(this, "Bienvenid@!");
             Principal ventana = new Principal();
+            ventana.setVisible(true);
             this.dispose();
         }else{
             JOptionPane.showMessageDialog(this, "Usuario No Registrado!");

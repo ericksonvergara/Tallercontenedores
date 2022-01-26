@@ -76,7 +76,7 @@ public class metodos_SQL {
         
         try {
             conexion = ConexionBD.conectar();
-            String sentencia_buscar_usuario = ("SELECT documento, correo, contraseña FROM usuario WHERE correo = '" + correo + "' && contraseña = '" + contraseña + "'" );
+            String sentencia_buscar_usuario = ("SELECT documento, correo, contraseña FROM usuario WHERE correo = '" + correo + "' and contraseña = '" + contraseña + "'" );
             sentencia_preparada = conexion.prepareStatement(sentencia_buscar_usuario);
             resultado = sentencia_preparada.executeQuery();
             if(resultado.next()){
