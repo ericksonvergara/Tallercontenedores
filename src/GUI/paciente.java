@@ -76,19 +76,19 @@ public class paciente extends javax.swing.JFrame {
 
         jLabel1.setText("Cedula:");
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(121, 56, 37, 14);
+        jLabel1.setBounds(121, 56, 40, 16);
 
         jLabel2.setText("Nombre:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(121, 94, 41, 14);
+        jLabel2.setBounds(121, 94, 47, 16);
 
         jLabel3.setText("Edad:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(121, 132, 28, 14);
+        jLabel3.setBounds(121, 132, 29, 16);
 
         jLabel4.setText("Telefono:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(121, 170, 46, 14);
+        jLabel4.setBounds(121, 170, 49, 16);
 
         cedula.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,13 +96,13 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(cedula);
-        cedula.setBounds(228, 53, 68, 20);
+        cedula.setBounds(228, 53, 68, 22);
         getContentPane().add(nombre);
-        nombre.setBounds(228, 91, 68, 20);
+        nombre.setBounds(228, 91, 68, 22);
         getContentPane().add(edad);
-        edad.setBounds(228, 129, 68, 20);
+        edad.setBounds(228, 129, 68, 22);
         getContentPane().add(telefono);
-        telefono.setBounds(228, 167, 68, 20);
+        telefono.setBounds(228, 167, 68, 22);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -111,7 +111,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(31, 193, 71, 23);
+        agregar.setBounds(31, 193, 73, 25);
 
         modificar.setText("modificar");
         modificar.addActionListener(new java.awt.event.ActionListener() {
@@ -120,7 +120,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(121, 193, 75, 23);
+        modificar.setBounds(121, 193, 83, 25);
 
         buscar.setText("buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -129,7 +129,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(228, 193, 65, 23);
+        buscar.setBounds(228, 193, 67, 25);
 
         eliminar.setText("eliminar");
         eliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -138,7 +138,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 193, 69, 23);
+        eliminar.setBounds(320, 193, 75, 25);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel5.setText("PACIENTE");
@@ -152,7 +152,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(75, 234, 69, 23);
+        enviar.setBounds(75, 234, 73, 25);
 
         tabla_paciente.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -185,7 +185,7 @@ public class paciente extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exportar);
-        exportar.setBounds(258, 234, 75, 23);
+        exportar.setBounds(258, 234, 77, 25);
 
         jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente.jpg"))); // NOI18N
         getContentPane().add(jLabel6);
