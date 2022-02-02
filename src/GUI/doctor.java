@@ -8,9 +8,14 @@ import tallercontenedores.contenedor_area;
 import tallercontenedores.contenedor_doctor;
 import static GUI.area.are;
 import static GUI.area.are2;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tallercontenedores.Archivo;
+import tallercontenedores.Conexion;
 /**
  *
  * @author SENA
@@ -26,8 +31,35 @@ public class doctor extends javax.swing.JFrame {
      * Creates new form doctor
      */
     public doctor() {
-        initComponents();
-        
+         initComponents();
+         
+         
+         try {
+             Conexion con = new Conexion();
+             con.ConexionPostgres();
+             String query = "SELECT * FROM area ORDER BY codigo_area";
+             
+             ResultSet rs = con.consultar(query);
+             
+             while(rs.next()){
+                 area_d.addItem(rs.getInt("codigo_area") + "-" + rs.getString("especialidad_area"));                
+             }
+             
+             area_d.setEnabled(false);
+             con.cerrar();
+            
+             
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         }
+             
+            
     }
 
     /**
@@ -94,32 +126,39 @@ public class doctor extends javax.swing.JFrame {
         jLabel5.setBounds(138, 130, 40, 16);
         getContentPane().add(cedula);
         cedula.setBounds(190, 38, 77, 20);
+
+        nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombreActionPerformed(evt);
+            }
+        });
         getContentPane().add(nombre);
         nombre.setBounds(190, 68, 77, 20);
         getContentPane().add(telefono);
         telefono.setBounds(190, 98, 80, 20);
 
-        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "General", "Especialista" }));
+        tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Medico General", "Especialista" }));
         tipo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 tipoActionPerformed(evt);
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 88, 22);
+        tipo.setBounds(190, 130, 98, 20);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
         getContentPane().add(jLabel6);
         jLabel6.setBounds(140, 160, 40, 16);
 
+        area_d.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         area_d.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 area_dActionPerformed(evt);
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 24);
+        area_d.setBounds(190, 160, 80, 20);
 
         agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregar.setText("agregar");
@@ -192,7 +231,7 @@ public class doctor extends javax.swing.JFrame {
         getContentPane().add(exportar);
         exportar.setBounds(240, 230, 90, 25);
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondodoctor.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\fondodoctor.jpg")); // NOI18N
         getContentPane().add(jLabel7);
         jLabel7.setBounds(-10, 0, 460, 417);
 
@@ -206,76 +245,168 @@ public class doctor extends javax.swing.JFrame {
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         // TODO add your handling code here:
-    String opcion1=(String)tipo.getSelectedItem(); 
-    if(opcion1.equals("General")){
-    String nom = nombre.getText().trim();
-    int ced = Integer.parseInt(cedula.getText().trim());
-    int tel = Integer.parseInt(telefono.getText().trim());
-    String tipod = (String) tipo.getSelectedItem();
-    String espe = "";
-    contenedor_doctor d1 = new contenedor_doctor(ced, nom, tel, tipod, espe);
-    doc.add(d1);
-    }
-        
-    String opcion2=(String)tipo.getSelectedItem(); 
-    if(opcion2.equals("Especialista")){
-    String nom = nombre.getText().trim();
-    int ced = Integer.parseInt(cedula.getText().trim());
-    int tel = Integer.parseInt(telefono.getText().trim());
-    String tipod = (String) tipo.getSelectedItem();
-    String espe = (String) area_d.getSelectedItem();
-    contenedor_doctor d1 = new contenedor_doctor(ced, nom, tel, tipod, espe);
-    doc.add(d1);
-    }
-    cedula.setText(null);
-    nombre.setText(null);
-    telefono.setText(null);
-    tipo.setSelectedItem("Seleccione");
+                
+         try {
+             Conexion con = new Conexion();
+             con.ConexionPostgres();
+             String item3 = (String) area_d.getSelectedItem();
+            java.util.StringTokenizer st = new java.util.StringTokenizer(item3, "-");
+            String codigoarea= st.nextToken();       
+                
+                
+            String item1 = (String) tipo.getSelectedItem();
+            if (item1.equals("Medico General")) {
+
+                
+                String query ="insert into doctor values("+Integer.parseInt(cedula.getText().trim())+",'"+nombre.getText().trim()+"',"+Integer.parseInt(telefono.getText().trim())+",'"+tipo.getSelectedItem()+"',"+"0)";
+                JOptionPane.showMessageDialog(this, "Registro exitoso");
+                con.actualizar(query);
+            }
+
+            String item2 = (String) tipo.getSelectedItem();
+            if (item2.equals("Especialista")) {
+                
+                String query ="insert into doctor values("+Integer.parseInt(cedula.getText().trim())+",'"+nombre.getText().trim()+"',"+Integer.parseInt(telefono.getText().trim())+",'"+tipo.getSelectedItem()+"',"+Integer.parseInt(codigoarea.trim())+")";
+                JOptionPane.showMessageDialog(this, "Registro exitoso");
+                con.actualizar(query);
+            }           
+            con.cerrar();
+            cedula.setText(null);
+            nombre.setText(null);
+            telefono.setText(null);
+            tipo.setSelectedItem("Seleccione");
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            
+            
+
+
+//    String opcion1=(String)tipo.getSelectedItem(); 
+//    if(opcion1.equals("General")){
+//    String nom = nombre.getText().trim();
+//    int ced = Integer.parseInt(cedula.getText().trim());
+//    int tel = Integer.parseInt(telefono.getText().trim());
+//    String tipod = (String) tipo.getSelectedItem();
+//    String espe = "";
+//    contenedor_doctor d1 = new contenedor_doctor(ced, nom, tel, tipod, espe);
+//    doc.add(d1);
+//    }
+//        
+//    String opcion2=(String)tipo.getSelectedItem(); 
+//    if(opcion2.equals("Especialista")){
+//    String nom = nombre.getText().trim();
+//    int ced = Integer.parseInt(cedula.getText().trim());
+//    int tel = Integer.parseInt(telefono.getText().trim());
+//    String tipod = (String) tipo.getSelectedItem();
+//    String espe = (String) area_d.getSelectedItem();
+//    contenedor_doctor d1 = new contenedor_doctor(ced, nom, tel, tipod, espe);
+//    doc.add(d1);
+//    }
+//    cedula.setText(null);
+//    nombre.setText(null);
+//    telefono.setText(null);
+//    tipo.setSelectedItem("Seleccione");
         
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
-        doc2.setNombre(nombre.getText().trim());
-        doc2.setTelefono(Integer.parseInt(telefono.getText().trim()));        
+        //doc2.setNombre(nombre.getText().trim());
+        //doc2.setTelefono(Integer.parseInt(telefono.getText().trim()));        
     }//GEN-LAST:event_modificarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
          //datos.setText(null);
-         String data[][] = {};
-         String col[] = {"Cedula","Nombre","Telefono","Tipo","Area"};
-         model = new DefaultTableModel(data,col);
-         tabla_doctor.setModel(model);
-         int con=0;
-        for(int i =0; i<doc.size(); i++)
-        {
-         contenedor_doctor d = (contenedor_doctor)doc.get(i);
-         //datos.setText( datos.getText() + d.getCedeula()+ "\t" + d.getNombre() + "\t" + d.getTelefono() + "\t" + d.getEspecialista() + "\n" + "  " + "\n");
-         model.insertRow(con,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-         model.setValueAt(d.getCedeula(), con, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-         model.setValueAt(d.getNombre(), con, 1);
-         model.setValueAt(d.getTelefono(), con, 2);
-         model.setValueAt(d.getGeneral(), con, 3);
-         model.setValueAt(d.getEspecialista(), con, 4);
-         con++;
+         
+         int con1=0;
+         try {
+             Conexion con = new Conexion();
+             con.ConexionPostgres();
+             String query = "SELECT * FROM doctor ORDER BY cedula_doctor";
+             
+             java.sql.ResultSet rs = con.consultar(query);
+             
+            String data[][] = {};
+            String col[] = {"Cedula","Nombre","Telefono","Tipo","Area"};
+            model = new DefaultTableModel(data,col);
+            tabla_doctor.setModel(model);
+            
+            while(rs.next()){
+                model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+            model.setValueAt(rs.getCedeula(), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+            model.setValueAt(rs.getNombre(), con1, 1);
+            model.setValueAt(rs.getTelefono(), con1, 2);
+            model.setValueAt(rs.getGeneral(), con1, 3);
+            model.setValueAt(rs.getEspecialista(), con1, 4);
+                
+            }             
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         }
+         
+//         String data[][] = {};
+//         String col[] = {"Cedula","Nombre","Telefono","Tipo","Area"};
+//         model = new DefaultTableModel(data,col);
+//         tabla_doctor.setModel(model);
+//         int con1=0;
+//        for(int i =0; i<doc.size(); i++)
+//        {
+//         contenedor_doctor d = (contenedor_doctor)doc.get(i);
+//         //datos.setText( datos.getText() + d.getCedeula()+ "\t" + d.getNombre() + "\t" + d.getTelefono() + "\t" + d.getEspecialista() + "\n" + "  " + "\n");
+//         model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+//         model.setValueAt(d.getCedeula(), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+//         model.setValueAt(d.getNombre(), con1, 1);
+//         model.setValueAt(d.getTelefono(), con1, 2);
+//         model.setValueAt(d.getGeneral(), con1, 3);
+//         model.setValueAt(d.getEspecialista(), con1, 4);
+//         con1++;
     }//GEN-LAST:event_enviarActionPerformed
-    }
+   
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
-        contenedor_area are2= null;
-        String op=(String)tipo.getSelectedItem();
+        String op=(String)tipo.getSelectedItem(); 
+ 
         if(op.equals("Especialista"))
         {
-            area_d.removeAllItems();
-        for(int i=0; i<area.are.size();i++)
-        {   are2=(contenedor_area)are.get(i);
-            area_d.addItem(are2.getNombreA());
-            }
-                }
-        else{
-            area_d.removeAllItems();
+        area_d.setEnabled(true);
         }
+        if(op.equals("Seleccione"))
+        {
+        area_d.setEnabled(false);
+        }
+        if(op.equals("Medico General"))
+        {
+        area_d.setSelectedItem("Seleccione");
+        area_d.setEnabled(false);
+        }
+        
+//        contenedor_area are2= null;
+//        String op=(String)tipo.getSelectedItem();
+//        if(op.equals("Especialista"))
+//        {
+//            area_d.removeAllItems();
+//        for(int i=0; i<area.are.size();i++)
+//        {   are2=(contenedor_area)are.get(i);
+//            area_d.addItem(are2.getNombreA());
+//            }
+//                }
+//        else{
+//            area_d.removeAllItems();
+//        }
         //opcion = (String) tipo.getSelectedItem();
     }//GEN-LAST:event_tipoActionPerformed
 
@@ -320,6 +451,10 @@ public class doctor extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_buscarActionPerformed
+
+    private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombreActionPerformed
     
     /**
      * @param args the command line arguments
