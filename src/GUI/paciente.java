@@ -4,10 +4,21 @@
  */
 package GUI;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tallercontenedores.contenedor_paciente;
 import tallercontenedores.Archivo;
+import tallercontenedores.Conexion;
 
 /**
  *
@@ -187,7 +198,7 @@ public class paciente extends javax.swing.JFrame {
         getContentPane().add(exportar);
         exportar.setBounds(258, 234, 77, 25);
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\paciente.jpg")); // NOI18N
         getContentPane().add(jLabel6);
         jLabel6.setBounds(0, 0, 470, 420);
 
@@ -195,79 +206,164 @@ public class paciente extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());
-        String nom = nombre.getText().trim();
-        int ed = Integer.parseInt(edad.getText().trim());
-        long tel = Long.parseLong(telefono.getText().trim());
-     
-        contenedor_paciente pac1 = new contenedor_paciente(ced, nom, ed, tel);
-     
-        pac.add(pac1);
-     
-        cedula.setText(null);
-        nombre.setText(null);
-        edad.setText(null);
-        telefono.setText(null);
+        try {
+            // TODO add your handling code here:
+            int ced = Integer.parseInt(cedula.getText().trim());
+            String nom = nombre.getText().trim();
+            int ed = Integer.parseInt(edad.getText().trim());
+            long tel = Long.parseLong(telefono.getText().trim());
+
+            contenedor_paciente pac1 = new contenedor_paciente(ced, nom, ed, tel);
+
+            pac.add(pac1);
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "INSERT INTO paciente VALUES(" + ced + ",'" + nom + "'," + ed + "," + tel + ")";
+            JOptionPane.showMessageDialog(this, "Registro exitoso!");
+            con.actualizar(query);
+            con.cerrar();
+
+            cedula.setText(null);
+            nombre.setText(null);
+            edad.setText(null);
+            telefono.setText(null);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_agregarActionPerformed
 
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
-        // TODO add your handling code here:
-        pac2.setNombre(nombre.getText().trim());
-        pac2.setEdad(Integer.parseInt(edad.getText().trim()));
-        pac2.setTelefono(Integer.parseInt(telefono.getText().trim()));
+        try {
+            // TODO add your handling code here:
+//        pac2.setNombre(nombre.getText().trim());
+//        pac2.setEdad(Integer.parseInt(edad.getText().trim()));
+//        pac2.setTelefono(Integer.parseInt(telefono.getText().trim()));
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+             String query = "UPDATE paciente SET nombre_paciente = '" + nombre.getText() + "', edad_paciente="+Integer.parseInt(edad.getText().trim())+","
+                     + " telefono_paciente="+Integer.parseInt(telefono.getText().trim())+" WHERE cedula_paciente = " + Integer.parseInt(cedula.getText());
+            JOptionPane.showMessageDialog(this, "Modificacion exitosa!");
+            con.actualizar(query);
+            con.cerrar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());
-        
-        boolean buscar = false;
-        contenedor_paciente p = null;
-     
-        for(int i =0; i<pac.size(); i++)
-        {
-         pac2 = (contenedor_paciente)pac.get(i);
+        try {
+            // TODO add your handling code here:
+            int ced = Integer.parseInt(cedula.getText().trim());
 
-         if(ced==pac2.getCedula())
-         {
-           buscar = true;
-           break;
-         }      
-        }
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM paciente WHERE cedula_paciente =" + ced;
+            ResultSet rs = con.consultar(query);
 
-        if(buscar)
-        {
-          nombre.setText(pac2.getNombre());
-          edad.setText(String.valueOf(pac2.getEdad()));
-          telefono.setText(String.valueOf(pac2.getTelefono()));
-        }else{
+            if (rs.next()) {
+                nombre.setText(rs.getString("nombre_paciente"));
+                edad.setText(rs.getString("edad_paciente"));
+                telefono.setText(rs.getString("telefono_paciente"));
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe el Area!");
+            }
+
+            con.cerrar();
+
+            /*
+            boolean buscar = false;
+            contenedor_paciente p = null;
+            
+            for(int i =0; i<pac.size(); i++)
+            {
+            pac2 = (contenedor_paciente)pac.get(i);
+            
+            if(ced==pac2.getCedula())
+            {
+            buscar = true;
+            break;
+            }
+            }
+            
+            if(buscar)
+            {
+            nombre.setText(pac2.getNombre());
+            edad.setText(String.valueOf(pac2.getEdad()));
+            telefono.setText(String.valueOf(pac2.getTelefono()));
+            }else{
             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+             */ } catch (ClassNotFoundException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
-     
     }//GEN-LAST:event_buscarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        // TODO add your handling code here:
-        //datos.setText(null);
-        String data[][]={};
-        String col[] = {"CEDULA", "NOMBRE","EDAD","TELEFONO"};
-        model = new DefaultTableModel(data,col);
-         tabla_paciente.setModel(model);
-         int con=0;
-     
-        for(int i =0; i<pac.size(); i++)
-        {
-         contenedor_paciente p = (contenedor_paciente)pac.get(i);
-         //datosA.setText( datosA.getText() + a.getNombreA() + "\t" + a.getId() + "\n" );
-         model.insertRow(con,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-         model.setValueAt(p.getCedula(), con, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-         model.setValueAt(p.getNombre(), con, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-         model.setValueAt(p.getEdad(), con, 2);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-         model.setValueAt(p.getTelefono(), con, 3);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-         
-         //nombre" + "\t" + "Edad " + "\t" + "Telefono" + "\n" + p.getCedula() + "\t" + p.getNombre() + "\t" + p.getEdad() + "\t" + p.getTelefono() + "\n" + "  " + "\n");
-        
+        try {
+            // TODO add your handling code here:
+            //datos.setText(null);
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM paciente ORDER BY cedula_paciente DESC";
+            java.sql.ResultSet rs = con.consultar(query);
+
+            String data[][] = {};
+            String col[] = {"CEDULA", "NOMBRE", "EDAD", "TELEFONO"};
+            model = new DefaultTableModel(data, col);
+            tabla_paciente.setModel(model);
+            int con1 = 0;
+
+            while (rs.next()) {
+                model.insertRow(con1, new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(rs.getInt("cedula_paciente"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getString("nombre_paciente"), con1, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getInt("edad_paciente"), con1, 2);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getInt("telefono_paciente"), con1, 3);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+            }
+            /*
+            for(int i =0; i<pac.size(); i++)
+            {
+                contenedor_paciente p = (contenedor_paciente)pac.get(i);
+                //datosA.setText( datosA.getText() + a.getNombreA() + "\t" + a.getId() + "\n" );
+                model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(p.getCedula(), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(p.getNombre(), con1, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(p.getEdad(), con1, 2);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(p.getTelefono(), con1, 3);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                
+                //nombre" + "\t" + "Edad " + "\t" + "Telefono" + "\n" + p.getCedula() + "\t" + p.getNombre() + "\t" + p.getEdad() + "\t" + p.getTelefono() + "\n" + "  " + "\n");
+                
+            }
+             */
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_enviarActionPerformed
 
@@ -282,16 +378,70 @@ public class paciente extends javax.swing.JFrame {
     }//GEN-LAST:event_cedulaActionPerformed
 
     private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
-        // TODO add your handling code here:
-        String cad="Cedula \t Nombre \t Edad \t Telefono \n";
-        
-        for(int i =0; i<pac.size(); i++){
-        contenedor_paciente p = (contenedor_paciente)pac.get(i);
-        cad+= p.getCedula() + "\t" + p.getNombre() + "\t" + p.getEdad() + "\t" + p.getTelefono() + "\n";
-    
-     }
-     
-        Archivo.grabar("Pacientes.xls", cad);
+        try {
+            // TODO add your handling code here:
+            /*
+            String cad="Cedula \t Nombre \t Edad \t Telefono \n";
+            
+            for(int i =0; i<pac.size(); i++){
+            contenedor_paciente p = (contenedor_paciente)pac.get(i);
+            cad+= p.getCedula() + "\t" + p.getNombre() + "\t" + p.getEdad() + "\t" + p.getTelefono() + "\n";
+            
+            }
+            
+            Archivo.grabar("Pacientes.xls", cad);
+             */
+
+            Document documento = new Document();
+            String ruta = System.getProperty("user.home");
+            try {
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/reporte_paciente.pdf"));
+                } catch (DocumentException ex) {
+                    Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            documento.open();
+            PdfPTable tabla = new PdfPTable(4);
+            tabla.addCell("Cedula");
+            tabla.addCell("Nombre");
+            tabla.addCell("Edad");
+            tabla.addCell("Telefono");
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM paciente";
+            java.sql.ResultSet rs = con.exportar(query);
+
+            if (rs.next()) {
+
+                while (rs.next()) {
+                    tabla.addCell(rs.getString(1));
+                    tabla.addCell(rs.getString(2));
+                    tabla.addCell(rs.getString(3));
+                    tabla.addCell(rs.getString(4));
+                }
+                try {
+                    documento.add(tabla);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            con.cerrar();
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte Creado!.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(paciente.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_exportarActionPerformed
 
     /**
