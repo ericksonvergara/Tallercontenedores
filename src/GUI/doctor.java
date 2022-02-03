@@ -8,6 +8,12 @@ import tallercontenedores.contenedor_area;
 import tallercontenedores.contenedor_doctor;
 import static GUI.area.are;
 import static GUI.area.are2;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -21,7 +27,8 @@ import tallercontenedores.Conexion;
  * @author SENA
  */
 public class doctor extends javax.swing.JFrame {
-     public static java.util.ArrayList doc = new java.util.ArrayList<>();
+
+    public static java.util.ArrayList doc = new java.util.ArrayList<>();
     public static contenedor_doctor doc2 = null;
     public static String opcion = null;
     private DefaultTableModel model; // ATRIBUTO DE CLASE
@@ -31,35 +38,31 @@ public class doctor extends javax.swing.JFrame {
      * Creates new form doctor
      */
     public doctor() {
-         initComponents();
+         initComponents();  
          
-         
-         try {
-             Conexion con = new Conexion();
-             con.ConexionPostgres();
-             String query = "SELECT * FROM area ORDER BY codigo_area";
-             
-             ResultSet rs = con.consultar(query);
-             
-             while(rs.next()){
-                 area_d.addItem(rs.getInt("codigo_area") + "-" + rs.getString("especialidad_area"));                
-             }
-             
-             area_d.setEnabled(false);
-             con.cerrar();
-            
-             
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalAccessException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         }
-             
-            
+        try {
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM area ORDER BY codigo_area";
+
+            ResultSet rs = con.consultar(query);
+
+            while (rs.next()) {
+                area_d.addItem(rs.getInt("codigo_area") + "-" + rs.getString("especialidad_area"));
+            }
+
+            area_d.setEnabled(false);
+            con.cerrar();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }        
     }
 
     /**
@@ -192,6 +195,11 @@ public class doctor extends javax.swing.JFrame {
 
         eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         eliminar.setText("eliminar");
+        eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminarActionPerformed(evt);
+            }
+        });
         getContentPane().add(eliminar);
         eliminar.setBounds(315, 190, 80, 25);
 
@@ -245,46 +253,41 @@ public class doctor extends javax.swing.JFrame {
         // TODO add your handling code here:
                 
          try {
-             Conexion con = new Conexion();
-             con.ConexionPostgres();
-             String item3 = (String) area_d.getSelectedItem();
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String item3 = (String) area_d.getSelectedItem();
             java.util.StringTokenizer st = new java.util.StringTokenizer(item3, "-");
-            String codigoarea= st.nextToken();       
-                
-                
+            String codigoarea = st.nextToken();
+
             String item1 = (String) tipo.getSelectedItem();
             if (item1.equals("Medico General")) {
 
-                
-                String query ="insert into doctor values("+Integer.parseInt(cedula.getText().trim())+",'"+nombre.getText().trim()+"',"+Integer.parseInt(telefono.getText().trim())+",'"+tipo.getSelectedItem()+"',"+"0)";
+                String query = "insert into doctor values(" + Integer.parseInt(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Integer.parseInt(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + "0)";
                 JOptionPane.showMessageDialog(this, "Registro exitoso");
                 con.actualizar(query);
             }
 
             String item2 = (String) tipo.getSelectedItem();
             if (item2.equals("Especialista")) {
-                
-                String query ="insert into doctor values("+Integer.parseInt(cedula.getText().trim())+",'"+nombre.getText().trim()+"',"+Integer.parseInt(telefono.getText().trim())+",'"+tipo.getSelectedItem()+"',"+Integer.parseInt(codigoarea.trim())+")";
+
+                String query = "insert into doctor values(" + Integer.parseInt(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Integer.parseInt(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + Integer.parseInt(codigoarea.trim()) + ")";
                 JOptionPane.showMessageDialog(this, "Registro exitoso");
                 con.actualizar(query);
-            }           
+            }
             con.cerrar();
             cedula.setText(null);
             nombre.setText(null);
             telefono.setText(null);
             tipo.setSelectedItem("Seleccione");
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalAccessException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         }
-            
-            
-
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
 //    String opcion1=(String)tipo.getSelectedItem(); 
 //    if(opcion1.equals("General")){
@@ -318,61 +321,79 @@ public class doctor extends javax.swing.JFrame {
         // TODO add your handling code here:
         //doc2.setNombre(nombre.getText().trim());
         //doc2.setTelefono(Integer.parseInt(telefono.getText().trim()));
-
         
-         try {
-             Conexion con = new Conexion();
-             con.ConexionPostgres();
-             String query = "UPDATE doctor SET nombre_doctor='"+nombre.getText()+"',telefono_doctor ="+telefono.getText()+",tipo_doctor='"+tipo.getSelectedItem()+"',especialidad_doctor='"+area_d.getSelectedItem()+"', WHERE cedula_doctor="+cedula.getText()+"";
-             JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
-             con.actualizar(query);
-             con.cerrar();
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalAccessException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        String item3 = (String) area_d.getSelectedItem();
+        java.util.StringTokenizer st = new java.util.StringTokenizer(item3, "-");
+        String codigoarea = st.nextToken();
+
+        try {
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+
+            String item1 = (String) tipo.getSelectedItem();
+            if (item1.equals("Medico General")) {
+
+                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Integer.parseInt(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=0 WHERE cedula_doctor =" + Integer.parseInt(cedula.getText().trim());
+                JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
+                con.actualizar(query);
+            }
+
+            String item2 = (String) tipo.getSelectedItem();
+            if (item2.equals("Especialista")) {
+
+                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Integer.parseInt(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=" + Integer.parseInt(codigoarea) + " WHERE cedula_doctor =" + Integer.parseInt(cedula.getText().trim());
+                JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
+                con.actualizar(query);
+            }
+
+            //JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
+            con.cerrar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
         // TODO add your handling code here:
          //datos.setText(null);
          
-         int con1=0;
-         try {
-             Conexion con = new Conexion();
-             con.ConexionPostgres();
-             String query = "SELECT * FROM doctor ORDER BY cedula_doctor";
-             
-             java.sql.ResultSet rs = con.consultar(query);
-             
+         int con1 = 0;
+        try {
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM doctor ORDER BY cedula_doctor";
+
+            java.sql.ResultSet rs = con.consultar(query);
+
             String data[][] = {};
-            String col[] = {"Cedula","Nombre","Telefono","Tipo","Area"};
-            model = new DefaultTableModel(data,col);
+            String col[] = {"Cedula", "Nombre", "Telefono", "Tipo", "Area"};
+            model = new DefaultTableModel(data, col);
             tabla_doctor.setModel(model);
-            
-            while(rs.next()){
-                model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-            model.setValueAt(rs.getInt("cedula_doctor"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-            model.setValueAt(rs.getString("nombre_doctor"), con1, 1);
-            model.setValueAt(rs.getInt("telefono_doctor"), con1, 2);
-            model.setValueAt(rs.getString("tipo_doctor"), con1, 3);
-            model.setValueAt(rs.getInt("especialidad_doctor"), con1, 4);
-                
-            }             
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalAccessException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         }
+
+            while (rs.next()) {
+                model.insertRow(con1, new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(rs.getInt("cedula_doctor"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getString("nombre_doctor"), con1, 1);
+                model.setValueAt(rs.getInt("telefono_doctor"), con1, 2);
+                model.setValueAt(rs.getString("tipo_doctor"), con1, 3);
+                model.setValueAt(rs.getInt("especialidad_doctor"), con1, 4);
+
+            }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
          
 //         String data[][] = {};
 //         String col[] = {"Cedula","Nombre","Telefono","Tipo","Area"};
@@ -394,20 +415,17 @@ public class doctor extends javax.swing.JFrame {
    
     private void tipoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoActionPerformed
         // TODO add your handling code here:
-        String op=(String)tipo.getSelectedItem(); 
- 
-        if(op.equals("Especialista"))
-        {
-        area_d.setEnabled(true);
+        String op = (String) tipo.getSelectedItem();
+
+        if (op.equals("Especialista")) {
+            area_d.setEnabled(true);
         }
-        if(op.equals("Seleccione"))
-        {
-        area_d.setEnabled(false);
+        if (op.equals("Seleccione")) {
+            area_d.setEnabled(false);
         }
-        if(op.equals("Medico General"))
-        {
-        area_d.setSelectedItem("Seleccione");
-        area_d.setEnabled(false);
+        if (op.equals("Medico General")) {
+            area_d.setSelectedItem("Seleccione");
+            area_d.setEnabled(false);
         }
         
 //        contenedor_area are2= null;
@@ -428,38 +446,91 @@ public class doctor extends javax.swing.JFrame {
 
     private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
         // TODO add your handling code here:
-        String cad="Cedula \t Nombre \t Telefono \t Tipo \t Area \n";
-        
+        /*
+        String cad="Cedula \t Nombre \t Telefono \t Tipo \t Area \n";        
         for(int i =0; i<doc.size(); i++){
         contenedor_doctor d = (contenedor_doctor)doc.get(i);
         cad+= d.getCedeula()+ "\t" + d.getNombre() + "\t" + d.getTelefono() + "\t" + d.getGeneral() + "\t" + d.getEspecialista() + "\n";
     
-     }
-     
+     }     
         Archivo.grabar("doctor.xls", cad);
+        */
+        
+        Document documento = new Document();
+        String ruta = System.getProperty("user.home");
+        try {
+            try {
+                PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/reporte_Doctor.pdf"));
+            } catch (DocumentException ex) {
+                Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        documento.open();
+        PdfPTable tabla = new PdfPTable(5);
+        tabla.addCell("Cedula");
+        tabla.addCell("Nombre");
+        tabla.addCell("Telefono");
+        tabla.addCell("Tipo");
+        tabla.addCell("Especialidad");
+
+        try {
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM doctor";
+            java.sql.ResultSet rs = con.exportar(query);
+
+            if (rs.next()) {
+                while (rs.next()) {
+                    tabla.addCell(rs.getString(1));
+                    tabla.addCell(rs.getString(2));
+                    tabla.addCell(rs.getString(3));
+                    tabla.addCell(rs.getString(4));
+                    tabla.addCell(rs.getString(5));
+                }
+                try {
+                    documento.add(tabla);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            con.cerrar();
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte Creado!.");
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_exportarActionPerformed
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
         int ced = Integer.parseInt(cedula.getText().trim());
         //int tel = Integer.parseInt(telefono.getText().trim());
-        
-         try {
-             Conexion con = new Conexion();
-             con.ConexionPostgres();
-             String query = "SELECT * FROM doctor WHERE cedula_doctor="+ced;
-             ResultSet rs = con.consultar(query);
-             
-             if(rs.next()){
-                 nombre.setText(rs.getString("nombre_doctor"));
-                 telefono.setText(rs.getString("telefono_doctor"));
-                 tipo.setSelectedItem(rs.getString("tipo_doctor"));
-                 area_d.setSelectedItem(rs.getString("especialidad_doctor"));
-             }else{
-             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
-             }
-             con.cerrar();
-             /*boolean buscar = false;
+
+        try {
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM doctor WHERE cedula_doctor=" + ced;
+            ResultSet rs = con.consultar(query);
+
+            if (rs.next()) {
+                nombre.setText(rs.getString("nombre_doctor"));
+                telefono.setText(rs.getString("telefono_doctor"));
+                tipo.setSelectedItem(rs.getString("tipo_doctor"));
+                area_d.setSelectedItem(rs.getString("especialidad_doctor"));
+            } else {
+                JOptionPane.showMessageDialog(null, "No existen datos!", "ERROR", JOptionPane.ERROR_MESSAGE);
+            }
+            con.cerrar();
+            /*boolean buscar = false;
              contenedor_doctor buscar_d = null;
              
              for(int i =0; i<doc.size(); i++)
@@ -482,20 +553,46 @@ public class doctor extends javax.swing.JFrame {
              }else{
              JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
              }*/
-         } catch (ClassNotFoundException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (SQLException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (InstantiationException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         } catch (IllegalAccessException ex) {
-             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-         }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
+
+    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
+        // TODO add your handling code here:       
+         try {
+            int fila = tabla_doctor.getSelectedRow();
+            String cod = "";
+            cod = tabla_doctor.getValueAt(fila, 0).toString();
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "DELETE FROM docotr WHERE cedula_doctor =" + Integer.parseInt(cedula.getText()) + "";
+            JOptionPane.showMessageDialog(this, "El registro ha sido Eliminado!");
+            con.eliminar(query);
+            con.cerrar();
+
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+    }//GEN-LAST:event_eliminarActionPerformed
     
     /**
      * @param args the command line arguments
