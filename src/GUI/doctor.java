@@ -144,7 +144,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 98, 20);
+        tipo.setBounds(190, 130, 111, 22);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
@@ -158,7 +158,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 20);
+        area_d.setBounds(190, 160, 80, 22);
 
         agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregar.setText("agregar");
@@ -230,10 +230,8 @@ public class doctor extends javax.swing.JFrame {
         });
         getContentPane().add(exportar);
         exportar.setBounds(240, 230, 90, 25);
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\fondodoctor.jpg")); // NOI18N
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(-10, 0, 460, 417);
+        jLabel7.setBounds(-10, 0, 460, 0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -319,7 +317,25 @@ public class doctor extends javax.swing.JFrame {
     private void modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificarActionPerformed
         // TODO add your handling code here:
         //doc2.setNombre(nombre.getText().trim());
-        //doc2.setTelefono(Integer.parseInt(telefono.getText().trim()));        
+        //doc2.setTelefono(Integer.parseInt(telefono.getText().trim()));
+
+        
+         try {
+             Conexion con = new Conexion();
+             con.ConexionPostgres();
+             String query = "UPDATE doctor SET nombre_doctor='"+nombre.getText()+"',telefono_doctor ="+telefono.getText()+",tipo_doctor='"+tipo.getSelectedItem()+"',especialidad_doctor='"+area_d.getSelectedItem()+"', WHERE cedula_doctor="+cedula.getText()+"";
+             JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
+             con.actualizar(query);
+             con.cerrar();
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_modificarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
@@ -341,11 +357,11 @@ public class doctor extends javax.swing.JFrame {
             
             while(rs.next()){
                 model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-            model.setValueAt(rs.getCedeula(), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-            model.setValueAt(rs.getNombre(), con1, 1);
-            model.setValueAt(rs.getTelefono(), con1, 2);
-            model.setValueAt(rs.getGeneral(), con1, 3);
-            model.setValueAt(rs.getEspecialista(), con1, 4);
+            model.setValueAt(rs.getInt("cedula_doctor"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+            model.setValueAt(rs.getString("nombre_doctor"), con1, 1);
+            model.setValueAt(rs.getInt("telefono_doctor"), con1, 2);
+            model.setValueAt(rs.getString("tipo_doctor"), con1, 3);
+            model.setValueAt(rs.getInt("especialidad_doctor"), con1, 4);
                 
             }             
          } catch (ClassNotFoundException ex) {
@@ -426,30 +442,55 @@ public class doctor extends javax.swing.JFrame {
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
         int ced = Integer.parseInt(cedula.getText().trim());
+        //int tel = Integer.parseInt(telefono.getText().trim());
         
-        boolean buscar = false;
-        contenedor_doctor buscar_d = null;
-     
-        for(int i =0; i<doc.size(); i++)
-        {
-         doc2 = (contenedor_doctor)doc.get(i);
-
-         if(ced==doc2.getCedeula())
-         {
-           buscar = true;
-           break;
-         }      
-        }
-
-        if(buscar)
-        {
-          nombre.setText(doc2.getNombre());
-          telefono.setText(String.valueOf(doc2.getTelefono()));
-          tipo.setSelectedItem("general");
-          area_d.setSelectedItem("Especialista");
-        }else{
-            JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
-        }
+         try {
+             Conexion con = new Conexion();
+             con.ConexionPostgres();
+             String query = "SELECT * FROM doctor WHERE cedula_doctor="+ced;
+             ResultSet rs = con.consultar(query);
+             
+             if(rs.next()){
+                 nombre.setText(rs.getString("nombre_doctor"));
+                 telefono.setText(rs.getString("telefono_doctor"));
+                 tipo.setSelectedItem(rs.getString("tipo_doctor"));
+                 area_d.setSelectedItem(rs.getString("especialidad_doctor"));
+             }else{
+             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
+             }
+             con.cerrar();
+             /*boolean buscar = false;
+             contenedor_doctor buscar_d = null;
+             
+             for(int i =0; i<doc.size(); i++)
+             {
+             doc2 = (contenedor_doctor)doc.get(i);
+             
+             if(ced==doc2.getCedeula())
+             {
+             buscar = true;
+             break;
+             }
+             }
+             
+             if(buscar)
+             {
+             nombre.setText(doc2.getNombre());
+             telefono.setText(String.valueOf(doc2.getTelefono()));
+             tipo.setSelectedItem("general");
+             area_d.setSelectedItem("Especialista");
+             }else{
+             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
+             }*/
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (SQLException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
+         }
     }//GEN-LAST:event_buscarActionPerformed
 
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed

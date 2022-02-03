@@ -303,11 +303,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel7">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\SENA\Documents\Repositorio\Tallercontenedores\src\iconos\fondodoctor.jpg"/>
-        </Property>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="-10" y="0" width="460" height="-1"/>
