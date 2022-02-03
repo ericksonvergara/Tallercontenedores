@@ -177,7 +177,7 @@ private DefaultTableModel model;
         getContentPane().add(exportar);
         exportar.setBounds(240, 230, 90, 25);
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoarea.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\fondoarea.jpg")); // NOI18N
         getContentPane().add(jLabel4);
         jLabel4.setBounds(-90, -10, 690, 710);
 
@@ -402,17 +402,19 @@ private DefaultTableModel model;
             String query = "SELECT * FROM area";
             java.sql.ResultSet rs = con.exportar(query);
             
-            con.cerrar();
+            
             if(rs.next()){
                 
-                do{
+                while(rs.next()){
                     tabla.addCell(rs.getString(1));
                     tabla.addCell(rs.getString(2));
-                }while(rs.next());
+                }
                 documento.add(tabla);
             }
+             con.cerrar();
         } catch (Exception e) {
         }
+       
         documento.close();
         JOptionPane.showMessageDialog(null, "Reporte Creado!.");
         
