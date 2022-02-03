@@ -27,9 +27,10 @@ import tallercontenedores.contenedor_area;
  * @author SENA
  */
 public class area extends javax.swing.JFrame {
-public static java.util.ArrayList are = new java.util.ArrayList<>();
-public static contenedor_area are2 = null;
-private DefaultTableModel model;
+
+    public static java.util.ArrayList are = new java.util.ArrayList<>();
+    public static contenedor_area are2 = null;
+    private DefaultTableModel model;
     /**
      * Creates new form area
      */
@@ -189,79 +190,75 @@ private DefaultTableModel model;
     }//GEN-LAST:event_nombreAreaActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-    try {
-        // TODO add your handling code here:
-        String nomA = nombreArea.getText().trim();
-        int ide = Integer.parseInt(idea.getText().trim());    
-        contenedor_area are1= new contenedor_area(ide,nomA);
-        
-        are.add(are1);   
-        
-        Conexion con = new Conexion();
-        con.ConexionPostgres();
-        String query ="INSERT INTO area VALUES("+ide+",'"+nomA.trim()+"')";
-        JOptionPane.showMessageDialog(this, "Registro exitoso!");
-        con.actualizar(query);       
-        con.cerrar();
-        
-        nombreArea.setText(null);
-        idea.setText(null);
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
-           
-        
+        try {
+            // TODO add your handling code here:
+            String nomA = nombreArea.getText().trim();
+            int ide = Integer.parseInt(idea.getText().trim());
+            contenedor_area are1 = new contenedor_area(ide, nomA);
+
+            are.add(are1);
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "INSERT INTO area VALUES(" + ide + ",'" + nomA.trim() + "')";
+            JOptionPane.showMessageDialog(this, "Registro exitoso!");
+            con.actualizar(query);
+            con.cerrar();
+
+            nombreArea.setText(null);
+            idea.setText(null);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_AgregarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-    try {
-        // TODO add your handling code here:
-        //are2.setNombreA(nombreArea.getText().trim());
-        
-        Conexion con = new Conexion();
-        con.ConexionPostgres();
-        String query = "UPDATE area SET especialidad_area = '"+nombreArea.getText()+"' WHERE codigo_area = "+Integer.parseInt(idea.getText());
-        JOptionPane.showMessageDialog(this, "Modificacion exitosa!");
-        con.actualizar(query);
-        con.cerrar();
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
-        
-        
+        try {
+            // TODO add your handling code here:
+            //are2.setNombreA(nombreArea.getText().trim());
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "UPDATE area SET especialidad_area = '" + nombreArea.getText() + "' WHERE codigo_area = " + Integer.parseInt(idea.getText());
+            JOptionPane.showMessageDialog(this, "Modificacion exitosa!");
+            con.actualizar(query);
+            con.cerrar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void BuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BuscarActionPerformed
-    try {
-        // TODO add your handling code here:
-        int ide = Integer.parseInt(idea.getText().trim());
-        
-        Conexion con = new Conexion();
-        con.ConexionPostgres();
-        
-        String query = "SELECT * FROM area WHERE codigo_area ="+ide;
-        ResultSet rs = con.consultar(query);
-        
-        if(rs.next()){
-            nombreArea.setText(rs.getString("especialidad_area"));
-        }else{
-            JOptionPane.showMessageDialog(this, "No existe el Area!");
-        }
-        
-        con.cerrar();
-        
+        try {
+            // TODO add your handling code here:
+            int ide = Integer.parseInt(idea.getText().trim());
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+
+            String query = "SELECT * FROM area WHERE codigo_area =" + ide;
+            ResultSet rs = con.consultar(query);
+
+            if (rs.next()) {
+                nombreArea.setText(rs.getString("especialidad_area"));
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe el Area!");
+            }
+
+            con.cerrar();
+
 //        boolean buscar = false;
 //        contenedor_area are1 = null;
 //     
@@ -283,87 +280,80 @@ private DefaultTableModel model;
 //        }else{
 //            JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
 //        }
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_BuscarActionPerformed
 
     private void MostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MostrarActionPerformed
-    
         // TODO add your handling code here:
-        
-        int con1=0;
-        
-    try {
-        
-        Conexion con = new Conexion();
-        con.ConexionPostgres();
-        
-        String query ="SELECT * FROM area ORDER BY codigo_area DESC";
-        
-        java.sql.ResultSet rs = con.consultar(query);
-        
-        String data[][]={};
-        String col[] = {"ID", "NOMBRE"};
-        model = new DefaultTableModel(data,col);
-        tabla_area.setModel(model);
-        
+        int con1 = 0;
+        try {
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM area ORDER BY codigo_area DESC";
+            java.sql.ResultSet rs = con.consultar(query);
+
+            String data[][] = {};
+            String col[] = {"ID", "NOMBRE"};
+            model = new DefaultTableModel(data, col);
+            tabla_area.setModel(model);
+
 //        for(int i =0; i<are.size(); i++)
 //        {
 //            contenedor_area a = (contenedor_area)are.get(i);
-
-            while(rs.next()){
-            //datosA.setText( datosA.getText() + a.getNombreA() + "\t" + a.getId() + "\n" );
-            model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-            model.setValueAt(rs.getInt("codigo_area"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-            model.setValueAt(rs.getString("especialidad_area"), con1, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+            while (rs.next()) {
+                //datosA.setText( datosA.getText() + a.getNombreA() + "\t" + a.getId() + "\n" );
+                model.insertRow(con1, new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(rs.getInt("codigo_area"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getString("especialidad_area"), con1, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
             }
 //        }                         
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_MostrarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
         // TODO add your handling code here:
         are.remove(are2);
-        nombreArea.setText(""); idea.setText("");
-        
-        
-    try {
-        
-        int fila = tabla_area.getSelectedRow();
-        String cod = "";
-        cod = tabla_area.getValueAt(fila, 0).toString();
-        
-        Conexion con = new Conexion();
-        con.ConexionPostgres();
-        String query = "DELETE FROM area WHERE codigo_area ='"+cod+"'";
-        JOptionPane.showMessageDialog(this, "El registro ha sido Eliminado!");
-        con.eliminar(query);
-        con.cerrar();
-    } catch (ClassNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (SQLException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (InstantiationException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    } catch (IllegalAccessException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
-       
+        nombreArea.setText("");
+        idea.setText("");
+
+        try {
+
+            int fila = tabla_area.getSelectedRow();
+            String cod = "";
+            cod = tabla_area.getValueAt(fila, 0).toString();
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "DELETE FROM area WHERE codigo_area ='" + cod + "'";
+            JOptionPane.showMessageDialog(this, "El registro ha sido Eliminado!");
+            con.eliminar(query);
+            con.cerrar();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
@@ -374,52 +364,44 @@ private DefaultTableModel model;
 //        contenedor_area a = (contenedor_area)are.get(i);
 //        cad+= a.getId()+ "\t" + a.getNombreA() + "\n";
 //    
-//     }
-//     
+//     }     
 //        Archivo.grabar("area.xls", cad);
         Document documento = new Document();
-        
-        
-            String ruta = System.getProperty("user.home");
-    try {
+        String ruta = System.getProperty("user.home");
+        try {
             try {
                 PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/reporte.pdf"));
             } catch (DocumentException ex) {
                 Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
             }
-    } catch (FileNotFoundException ex) {
-        Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
-    }
-            documento.open();
-            
-            PdfPTable tabla = new PdfPTable(2);
-            tabla.addCell("Codigo");
-            tabla.addCell("Especialidad");
-            
-            try{
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(area.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        documento.open();
+        PdfPTable tabla = new PdfPTable(2);
+        tabla.addCell("Codigo");
+        tabla.addCell("Especialidad");
+
+        try {
             Conexion con = new Conexion();
             con.ConexionPostgres();
             String query = "SELECT * FROM area";
             java.sql.ResultSet rs = con.exportar(query);
-            
-            
-            if(rs.next()){
-                
-                while(rs.next()){
+
+            if (rs.next()) {
+
+                while (rs.next()) {
                     tabla.addCell(rs.getString(1));
                     tabla.addCell(rs.getString(2));
                 }
                 documento.add(tabla);
             }
-             con.cerrar();
+            con.cerrar();
         } catch (Exception e) {
         }
-       
         documento.close();
         JOptionPane.showMessageDialog(null, "Reporte Creado!.");
-        
-        
-                
     }//GEN-LAST:event_exportarActionPerformed
 
     /**
