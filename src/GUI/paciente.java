@@ -279,7 +279,7 @@ public class paciente extends javax.swing.JFrame {
                 edad.setText(rs.getString("edad_paciente"));
                 telefono.setText(rs.getString("telefono_paciente"));
             } else {
-                JOptionPane.showMessageDialog(this, "No existe el Area!");
+                JOptionPane.showMessageDialog(this, "No existe el Paciente!");
             }
 
             con.cerrar();

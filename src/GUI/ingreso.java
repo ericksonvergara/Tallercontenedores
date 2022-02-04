@@ -5,13 +5,18 @@
 package GUI;
 import static GUI.paciente.pac;
 import static GUI.paciente.pac2;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.DateFormat;
 import tallercontenedores.contenedor_ingreso;
 import tallercontenedores.contenedor_paciente;
 import java.text.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import tallercontenedores.Archivo;
+import tallercontenedores.Conexion;
 
 
 /**
@@ -19,10 +24,11 @@ import tallercontenedores.Archivo;
  * @author SENA
  */
 public class ingreso extends javax.swing.JFrame {
+
     public static java.util.ArrayList ingreso = new java.util.ArrayList();
     public static contenedor_ingreso ingreso2 = null;
     private DefaultTableModel model;
-    
+
     public static String formato = "dd/MMM/yyyy";
     public static String fecha;
     public static DateFormat formato1;
@@ -72,21 +78,21 @@ public class ingreso extends javax.swing.JFrame {
 
         fecha_i.setMinSelectableDate(new java.util.Date(-62135747899000L));
         getContentPane().add(fecha_i);
-        fecha_i.setBounds(227, 137, 81, 20);
+        fecha_i.setBounds(227, 137, 73, 22);
 
         jLabel2.setText("Fecha ingreso:");
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(138, 143, 71, 14);
+        jLabel2.setBounds(138, 143, 76, 16);
 
         jLabel4.setText("Cedula: ");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(10, 83, 40, 14);
+        jLabel4.setBounds(10, 83, 43, 16);
         getContentPane().add(cedula);
         cedula.setBounds(68, 80, 90, 20);
 
         jLabel5.setText("Nombre:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(166, 83, 41, 14);
+        jLabel5.setBounds(166, 83, 47, 16);
 
         nombre.setEditable(false);
         getContentPane().add(nombre);
@@ -99,7 +105,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(50, 200, 80, 23);
+        buscar.setBounds(50, 200, 80, 25);
 
         agregar.setText("agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -108,7 +114,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(160, 200, 71, 23);
+        agregar.setBounds(160, 200, 73, 25);
 
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -117,7 +123,7 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(260, 200, 69, 23);
+        enviar.setBounds(260, 200, 73, 25);
 
         tabla_ingreso.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -150,9 +156,9 @@ public class ingreso extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exportar);
-        exportar.setBounds(350, 200, 80, 23);
+        exportar.setBounds(350, 200, 80, 25);
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/fondoIngreso.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\fondoIngreso.jpg")); // NOI18N
         getContentPane().add(jLabel3);
         jLabel3.setBounds(0, 0, 520, 410);
 
@@ -160,61 +166,104 @@ public class ingreso extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
-        // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());
-        
-        boolean buscar = false;
-        contenedor_ingreso in = null;
-     
-        for(int i =0; i<pac.size(); i++)
-        {
-         pac2 = (contenedor_paciente)pac.get(i);
+        try {
+            // TODO add your handling code here:
+            int ced = Integer.parseInt(cedula.getText().trim());        
+            
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            //boolean buscar = false;
+            String query = "SELECT * FROM paciente WHERE cedula_paciente =" + ced;
+            ResultSet rs = con.consultar(query);
 
-         if(ced==pac2.getCedula())
-         {
-           buscar = true;
-           break;
-         }      
-        }
+            if (rs.next()) {
+                nombre.setText(rs.getString("nombre_paciente"));                
+            } else {
+                JOptionPane.showMessageDialog(this, "No existe el Paciente!");
+            }
 
-        if(buscar)
-        {
-        nombre.setText(pac2.getNombre());
-        }else{
-             JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE); 
+            con.cerrar();
+            /*
+            contenedor_ingreso in = null;
+            
+            for(int i =0; i<pac.size(); i++)
+            {
+                pac2 = (contenedor_paciente)pac.get(i);
+                
+                if(ced==pac2.getCedula())
+                {
+                    buscar = true;
+                    break;
+                }
+            }
+            
+            if(buscar)
+            {
+                nombre.setText(pac2.getNombre());
+            }else{ 
+                JOptionPane.showMessageDialog(null,"No existen datos!","ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            */
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
         }
         
         
     }//GEN-LAST:event_buscarActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
-        // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());
-        String nombre_paciente = pac2.getNombre().trim();
-        boolean saber = false;
-        contenedor_ingreso ingreso_a = null;
-     
-        for(int i =0; i<pac.size(); i++)
-        {
-        pac2=(contenedor_paciente)pac.get(i);
-      
-        if(ced==pac2.getCedula());
-        {
-        saber = true;
-        break;
-      }      
-     }
-        if(saber)
-        {
-        String nom = (String) nombre.getName();        
-        contenedor_ingreso ing = new contenedor_ingreso(ced, nom, fecha_i.getDate());
-        ingreso.add(ing);
-     }else{
-          
+        try {
+            // TODO add your handling code here:
+            int ced = Integer.parseInt(cedula.getText().trim());
+            //String nombre_paciente = pac2.getNombre().trim();
+            //boolean saber = false;
+            //contenedor_ingreso ingreso_a = null;
+            
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "INSERT INTO ingreso VALUES("+ced+",'"+nombre.getText().trim()+"','"+fecha_i.getDateFormatString().trim()+"')";
+            JOptionPane.showMessageDialog(this, "Registro exitoso!");
+            con.actualizar(query);
+            con.cerrar();
+            
+            /*
+            for(int i =0; i<pac.size(); i++)
+            {
+                pac2=(contenedor_paciente)pac.get(i);
+                
+                if(ced==pac2.getCedula());
+                {
+                    saber = true;
+                    break;
+                }
+            }
+            if(saber)
+            {
+                String nom = (String) nombre.getName();
+                contenedor_ingreso ing = new contenedor_ingreso(ced, nom, fecha_i.getDate());
+                ingreso.add(ing);
+            }else{
+                
+            }
+            */
+            cedula.setText(null);
+            nombre.setText(null);
+            fecha_i.setDate(null);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
         }
-        cedula.setText(null);
-        nombre.setText(nombre_paciente);
-        fecha_i.setDate(null);
         
     }//GEN-LAST:event_agregarActionPerformed
 
