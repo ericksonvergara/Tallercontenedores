@@ -130,6 +130,8 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
         String busqueda_usuario = metodos.buscarUsuarioRegistrado(usuario.getText(), contraseña_login.getText());
         
+        
+        
         if(usuario.getText().equals("postgres") && contraseña_login.getText().equals("1705")){            
             JOptionPane.showMessageDialog(this, "Bienvenid@! (Administrador)");
             Principal ventana = new Principal();

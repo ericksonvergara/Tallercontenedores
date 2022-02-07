@@ -159,6 +159,7 @@ public class Registrar extends javax.swing.JFrame {
         // TODO add your handling code here:
         //int documento = Integer.parseInt(documento_registro.getText().trim());
         //int telefono = Integer.parseInt(telefono_registro.getText().trim());
+        
         int i = metodos.guardar(nombre_registro.getText(), documento_registro.getText(), correo_registro.getText(), telefono_registro.getText(), contraseña_registro.getText());
         
         if(i > 0){

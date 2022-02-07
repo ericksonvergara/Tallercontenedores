@@ -13,9 +13,9 @@ import java.sql.SQLException;
  * @author ERICK
  */
 public class ConexionBD {
-    public static String url = "jdbc:postgresql://localhost:5432/login_bd";
+    public static String url = "jdbc:postgresql://localhost:5433/login_bd";
     public static String usuario =  "postgres";
-    public static String contraseña = "1705";
+    public static String contraseña = "123456";
     public static String clase = "org.postgresql.Driver";
     
     public static Connection conectar(){

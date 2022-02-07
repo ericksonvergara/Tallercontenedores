@@ -29,10 +29,13 @@ public class ingreso extends javax.swing.JFrame {
     public static contenedor_ingreso ingreso2 = null;
     private DefaultTableModel model;
 
-    public static String formato = "dd/MMM/yyyy";
-    public static String fecha;
-    public static DateFormat formato1;
+//    public static String formato = "dd/MMM/yyyy";
+//    public static String fecha;
+//    public static DateFormat formato1;
     
+    public static String patron = "dd/MMM/yyyy";
+    public static String sfecha;
+    public static DateFormat formato1;
 
     /**
      * Creates new form estado
@@ -225,9 +228,13 @@ public class ingreso extends javax.swing.JFrame {
             //boolean saber = false;
             //contenedor_ingreso ingreso_a = null;
             
+            formato1 = DateFormat.getDateInstance();
+            sfecha = formato1.format(fecha_i.getDate());
+            //System.out.println("hoy es: " + sfecha);
+            
             Conexion con = new Conexion();
             con.ConexionPostgres();
-            String query = "INSERT INTO ingreso VALUES("+ced+",'"+nombre.getText().trim()+"','"+fecha_i.getDateEditor().getUiComponent()+"')";
+            String query = "INSERT INTO ingreso VALUES("+ced+",'"+nombre.getText().trim()+"','"+sfecha+"')";
             JOptionPane.showMessageDialog(this, "Registro exitoso!");
             con.actualizar(query);
             con.cerrar();
