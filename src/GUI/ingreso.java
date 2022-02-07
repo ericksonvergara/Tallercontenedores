@@ -227,7 +227,7 @@ public class ingreso extends javax.swing.JFrame {
             
             Conexion con = new Conexion();
             con.ConexionPostgres();
-            String query = "INSERT INTO ingreso VALUES("+ced+",'"+nombre.getText().trim()+"','"+fecha_i.getDateFormatString().trim()+"')";
+            String query = "INSERT INTO ingreso VALUES("+ced+",'"+nombre.getText().trim()+"','"+fecha_i.getDateEditor().getUiComponent()+"')";
             JOptionPane.showMessageDialog(this, "Registro exitoso!");
             con.actualizar(query);
             con.cerrar();
