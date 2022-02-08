@@ -56,11 +56,6 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="Areas">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\area .png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AreasActionPerformed"/>
       </Events>
@@ -71,11 +66,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="Paciente">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\paciente (3).png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PacienteActionPerformed"/>
       </Events>
@@ -86,11 +76,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="ingreso">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\ingreso .png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingresoActionPerformed"/>
       </Events>
@@ -101,11 +86,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="salida">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\salida .png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salidaActionPerformed"/>
       </Events>
@@ -116,11 +96,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="doctor">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\doctor .png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorActionPerformed"/>
       </Events>
@@ -131,11 +106,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="salir">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\cerrar (2).png"/>
-        </Property>
-      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirActionPerformed"/>
       </Events>
@@ -146,11 +116,6 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
-      <Properties>
-        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\inicio.jpg"/>
-        </Property>
-      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="-70" width="630" height="690"/>

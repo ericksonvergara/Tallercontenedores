@@ -21,9 +21,9 @@ public class Conexion{
 	public Conexion(){
 		
 	this.usuario = "postgres";
-	this.password = "1705";
+	this.password = "123456";
 	this.iP = "localhost";
-	this.puerto = "5432";
+	this.puerto = "5433";
 	this.nombreBD = "login_bd";
 				
 		}	

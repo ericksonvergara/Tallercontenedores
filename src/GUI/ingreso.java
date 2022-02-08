@@ -275,21 +275,47 @@ public class ingreso extends javax.swing.JFrame {
     }//GEN-LAST:event_agregarActionPerformed
 
     private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
-        // TODO add your handling code here:
-        //datos.setText(null);
-        String data[][]={};
-        String col[] = {"CEDULA", "NOMBRE","Fecha ingreso"};
-        model = new DefaultTableModel(data,col);
-         tabla_ingreso.setModel(model);
-         int con=0;
-        formato1 = DateFormat.getDateInstance();
-        for (int i = 0; i<ingreso.size(); i++){
-            contenedor_ingreso ingre = (contenedor_ingreso) ingreso.get(i);
-            //datos.setText( datos.getText() + ingre.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingre.getFecha_ingreso()) + "\n" );
-             model.insertRow(con,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-             model.setValueAt(ingre.getCedula(), con, 0);
-             model.setValueAt(pac2.getNombre(), con, 1);
-             model.setValueAt(formato1.format(ingre.getFecha_ingreso()), con, 2);
+        try {
+            int con1=0;
+            // TODO add your handling code here:
+            //datos.setText(null);
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM ingreso ORDER BY cedula_paciente";
+            ResultSet rs = con.consultar(query);
+            
+            String data[][]={};
+            String col[] = {"Cedula", "Nombre","Fecha ingreso"};
+            model = new DefaultTableModel(data,col);
+            tabla_ingreso.setModel(model);
+            
+            while(rs.next()){
+                model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(rs.getInt("cedula_paciente"), con1, 0);
+                model.setValueAt(rs.getString("nombre_paciente"), con1, 1);
+                model.setValueAt(rs.getDate("fecha_ingreso"), con1, 2);
+                
+            }
+            
+            /*
+            formato1 = DateFormat.getDateInstance();
+            for (int i = 0; i<ingreso.size(); i++){
+                contenedor_ingreso ingre = (contenedor_ingreso) ingreso.get(i);
+                //datos.setText( datos.getText() + ingre.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingre.getFecha_ingreso()) + "\n" );
+                model.insertRow(con1,new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
+                model.setValueAt(ingre.getCedula(), con1, 0);
+                model.setValueAt(pac2.getNombre(), con1, 1);
+                model.setValueAt(formato1.format(ingre.getFecha_ingreso()), con1, 2);
+            }
+            */
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_enviarActionPerformed
 
