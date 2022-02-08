@@ -147,7 +147,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 98, 20);
+        tipo.setBounds(190, 130, 111, 22);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
@@ -161,7 +161,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 20);
+        area_d.setBounds(190, 160, 80, 22);
 
         agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregar.setText("agregar");

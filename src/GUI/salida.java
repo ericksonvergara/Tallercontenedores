@@ -18,6 +18,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import tallercontenedores.Conexion;
 import tallercontenedores.contenedor_area;
 import tallercontenedores.contenedor_doctor;
@@ -32,9 +33,11 @@ import tallercontenedores.contenedor_paciente;
 public class salida extends javax.swing.JFrame {
     public static java.util.ArrayList salida = new java.util.ArrayList();
     public static contenedor_salida salida2 = null;
+    private DefaultTableModel model;
     
     public static String patron = "dd/MMM/yyyy";
     public static String sfecha;
+    public static String sfecha2;
     public static DateFormat formato1;
     
 
@@ -86,7 +89,7 @@ public class salida extends javax.swing.JFrame {
         cedula_paciente = new javax.swing.JTextField();
         nombre_paciente = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        fecha_i = new com.toedter.calendar.JDateChooser();
+        fecha_ingreso = new com.toedter.calendar.JDateChooser();
         modificar = new javax.swing.JButton();
         agregar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
@@ -99,10 +102,10 @@ public class salida extends javax.swing.JFrame {
         enviar = new javax.swing.JButton();
         exportar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabla_salida = new javax.swing.JTable();
         jLabel12 = new javax.swing.JLabel();
+        estado_paciente = new javax.swing.JComboBox<>();
         nombre_doctor = new javax.swing.JComboBox<>();
-        jComboBox1 = new javax.swing.JComboBox<>();
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -124,7 +127,7 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(310, 70, 119, 14);
         getContentPane().add(cedula_paciente);
-        cedula_paciente.setBounds(138, 70, 150, 20);
+        cedula_paciente.setBounds(138, 70, 150, 22);
 
         nombre_paciente.setEditable(false);
         nombre_paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -133,18 +136,18 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_paciente);
-        nombre_paciente.setBounds(430, 70, 150, 20);
+        nombre_paciente.setBounds(430, 70, 150, 22);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Fecha de ingreso:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 110, 110, 14);
-        getContentPane().add(fecha_i);
-        fecha_i.setBounds(138, 110, 150, 20);
+        getContentPane().add(fecha_ingreso);
+        fecha_ingreso.setBounds(138, 110, 150, 22);
 
         modificar.setText("Modificar");
         getContentPane().add(modificar);
-        modificar.setBounds(140, 330, 75, 23);
+        modificar.setBounds(140, 330, 83, 25);
 
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -153,14 +156,14 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(40, 330, 71, 23);
+        agregar.setBounds(40, 330, 75, 25);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Fecha de salida:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(310, 110, 100, 20);
         getContentPane().add(fecha_salida);
-        fecha_salida.setBounds(430, 110, 150, 20);
+        fecha_salida.setBounds(430, 110, 150, 22);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
@@ -178,7 +181,7 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(total);
-        total.setBounds(310, 230, 76, 20);
+        total.setBounds(310, 230, 76, 22);
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -187,21 +190,26 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(230, 330, 65, 23);
+        buscar.setBounds(230, 330, 67, 25);
 
         eliminar.setText("Eliminar");
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 330, 69, 23);
+        eliminar.setBounds(320, 330, 75, 25);
 
         enviar.setText("Mostrar");
+        enviar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                enviarActionPerformed(evt);
+            }
+        });
         getContentPane().add(enviar);
-        enviar.setBounds(410, 330, 69, 23);
+        enviar.setBounds(410, 330, 73, 25);
 
         exportar.setText("exportar");
         getContentPane().add(exportar);
-        exportar.setBounds(500, 330, 80, 23);
+        exportar.setBounds(500, 330, 80, 25);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabla_salida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
@@ -212,7 +220,7 @@ public class salida extends javax.swing.JFrame {
                 "Cedula", "Nombre", "Doctor", "Estado", "Fecha ingreso", "Fecha salida", "Total"
             }
         ));
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabla_salida);
 
         getContentPane().add(jScrollPane2);
         jScrollPane2.setBounds(10, 390, 580, 120);
@@ -222,20 +230,18 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel12);
         jLabel12.setBounds(310, 150, 130, 15);
 
-        nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
+        estado_paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Observacion", "Tratamiento", "U.C.I" }));
+        getContentPane().add(estado_paciente);
+        estado_paciente.setBounds(450, 150, 130, 22);
+
+        nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccione" }));
         nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 nombre_doctorActionPerformed(evt);
             }
         });
         getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(140, 150, 150, 20);
-
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Observacion", "Tratamiento", "U.C.I" }));
-        getContentPane().add(jComboBox1);
-        jComboBox1.setBounds(450, 150, 130, 20);
-
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\fondosalida.jpg")); // NOI18N
+        nombre_doctor.setBounds(140, 160, 150, 22);
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 630, 600);
 
@@ -262,7 +268,7 @@ public class salida extends javax.swing.JFrame {
 
             if (rs.next()) {
                 nombre_paciente.setText(rs.getString("nombre_paciente"));
-                fecha_i.setDate(rs.getDate("fecha_ingreso"));
+                fecha_ingreso.setDate(rs.getDate("fecha_ingreso"));
             } else {
                 JOptionPane.showMessageDialog(this, "No existe el Paciente!");
             }
@@ -305,20 +311,59 @@ public class salida extends javax.swing.JFrame {
     }//GEN-LAST:event_buscarActionPerformed
 
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
+        // TODO add your handling code here:
         try {
-            // TODO add your handling code here:
+             Conexion con = new Conexion();
+            con.ConexionPostgres();
+            
             int ced = Integer.parseInt(cedula_paciente.getText().trim());
+            //long total_pagar = Long.parseLong(total.getText().trim());
             
             formato1 = DateFormat.getDateInstance();
-            sfecha = formato1.format(fecha_i.getDate());
+            sfecha = formato1.format(fecha_ingreso.getDate());
+            sfecha2 = formato1.format(fecha_salida.getDate());
             
-            Conexion con = new Conexion();
-            con.ConexionPostgres();
             String item3 = (String) nombre_doctor.getSelectedItem();
             java.util.StringTokenizer st = new java.util.StringTokenizer(item3, "-");
             String cedula_doc = st.nextToken();
+            String nom_doc = st.nextToken();
             
-            String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()"','"sfecha"'");
+            long tiempo_hospitalizado = fecha_ingreso.getDate().getTime()-fecha_salida.getDate().getTime();
+            long dias = tiempo_hospitalizado / (1000 * 60 * 60 * 24);
+            
+            String estps = (String) estado_paciente.getSelectedItem();
+            
+            
+            if(estps.equals("Observacion")){
+                 long total_dias=dias*50000;
+                 String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
+                 JOptionPane.showMessageDialog(this, "registro Exitoso!");
+                 JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
+                 con.actualizar(query);
+            }
+            
+            if(estps.equals("Tratamiento")){
+                long total_dias=dias*100000;
+                String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
+                JOptionPane.showMessageDialog(this, "registro Exitoso!");
+                JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
+                con.actualizar(query);
+            }
+            
+            if(estps.equals("U.C.I")){
+                long total_dias=dias*200000;                
+                String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
+                JOptionPane.showMessageDialog(this, "registro Exitoso!");
+                JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
+                con.actualizar(query);
+            }
+            
+            
+//            String total_dias = null;
+//            
+//            total.setText(total_dias);
+              
+            con.cerrar();
             
             /*
             String nombre_paciente = pac2.getNombre().trim();
@@ -361,18 +406,52 @@ public class salida extends javax.swing.JFrame {
 
     private void nombre_doctorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_doctorActionPerformed
         // TODO add your handling code here:
-        contenedor_doctor sali2= null;
-        String oper=(String)nombre_doctor.getSelectedItem();
-       
-            nombre_doctor.removeAllItems();
-        for(int i=0; i<doctor.doc.size();i++)
-        {   sali2=(contenedor_doctor)doc.get(i);
-            nombre_doctor.addItem(sali2.getNombre());
-            }
-       
-        
-        
     }//GEN-LAST:event_nombre_doctorActionPerformed
+
+    private void enviarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_enviarActionPerformed
+        // TODO add your handling code here:
+        int con1 = 0;
+        try {
+            
+            
+            
+            
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM salida ORDER BY cedula_paciente";
+            
+            ResultSet rs = con.consultar(query);
+            
+            String data[][] = {};
+            String col[] = {"Cedula", "Nombre", "Doctor", "Estado", "Fecha Ingreso", "Fecha Salida", "Total"};
+            model = new DefaultTableModel(data, col);
+            tabla_salida.setModel(model);
+            
+            while(rs.next()){
+                model.insertRow(con1, new Object[]{});
+                model.setValueAt(rs.getInt("cedula_paciente"), con1, 0);
+                model.setValueAt(rs.getString("nombre_paciente"), con1, 1);
+                model.setValueAt(rs.getDate("fecha_ingreso"), con1, 2);
+                model.setValueAt(rs.getDate("fecha_salida"), con1, 3);
+                model.setValueAt(rs.getString("nombre_doctor"), con1, 4);
+                model.setValueAt(rs.getString("estado_paciente"), con1, 5);
+                model.setValueAt(rs.getInt("valor_pagar"), con1, 6);
+                con1++;
+            }
+            con.cerrar();
+                    
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        
+    }//GEN-LAST:event_enviarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -415,10 +494,10 @@ public class salida extends javax.swing.JFrame {
     private javax.swing.JTextField cedula_paciente;
     private javax.swing.JButton eliminar;
     private javax.swing.JButton enviar;
+    private javax.swing.JComboBox<String> estado_paciente;
     private javax.swing.JButton exportar;
-    private com.toedter.calendar.JDateChooser fecha_i;
+    private com.toedter.calendar.JDateChooser fecha_ingreso;
     private com.toedter.calendar.JDateChooser fecha_salida;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -429,10 +508,10 @@ public class salida extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable1;
     private javax.swing.JButton modificar;
     private javax.swing.JComboBox<String> nombre_doctor;
     private javax.swing.JTextField nombre_paciente;
+    private javax.swing.JTable tabla_salida;
     private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }

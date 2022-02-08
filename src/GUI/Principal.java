@@ -50,7 +50,7 @@ public class Principal extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(626, 626));
         getContentPane().setLayout(null);
 
-        Areas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/area .png"))); // NOI18N
+        Areas.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\area .png")); // NOI18N
         Areas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AreasActionPerformed(evt);
@@ -59,7 +59,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Areas);
         Areas.setBounds(0, 200, 81, 57);
 
-        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente (3).png"))); // NOI18N
+        Paciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\paciente (3).png")); // NOI18N
         Paciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PacienteActionPerformed(evt);
@@ -68,7 +68,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Paciente);
         Paciente.setBounds(0, 40, 81, 57);
 
-        ingreso.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/ingreso .png"))); // NOI18N
+        ingreso.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\ingreso .png")); // NOI18N
         ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresoActionPerformed(evt);
@@ -77,7 +77,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(ingreso);
         ingreso.setBounds(0, 290, 81, 57);
 
-        salida.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/salida .png"))); // NOI18N
+        salida.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\salida .png")); // NOI18N
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salidaActionPerformed(evt);
@@ -86,7 +86,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(salida);
         salida.setBounds(0, 380, 81, 57);
 
-        doctor.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/doctor .png"))); // NOI18N
+        doctor.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\doctor .png")); // NOI18N
         doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doctorActionPerformed(evt);
@@ -95,7 +95,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(doctor);
         doctor.setBounds(0, 120, 81, 57);
 
-        salir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/cerrar (2).png"))); // NOI18N
+        salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\cerrar (2).png")); // NOI18N
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
@@ -104,7 +104,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(salir);
         salir.setBounds(530, 0, 81, 57);
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/inicio.jpg"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\inicio.jpg")); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, -70, 630, 690);
 

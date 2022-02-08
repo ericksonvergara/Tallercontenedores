@@ -58,7 +58,7 @@
     <Component class="javax.swing.JButton" name="Areas">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/area .png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\area .png"/>
         </Property>
       </Properties>
       <Events>
@@ -73,7 +73,7 @@
     <Component class="javax.swing.JButton" name="Paciente">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/paciente (3).png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\paciente (3).png"/>
         </Property>
       </Properties>
       <Events>
@@ -88,7 +88,7 @@
     <Component class="javax.swing.JButton" name="ingreso">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/ingreso .png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\ingreso .png"/>
         </Property>
       </Properties>
       <Events>
@@ -103,7 +103,7 @@
     <Component class="javax.swing.JButton" name="salida">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/salida .png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\salida .png"/>
         </Property>
       </Properties>
       <Events>
@@ -118,7 +118,7 @@
     <Component class="javax.swing.JButton" name="doctor">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/doctor .png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\doctor .png"/>
         </Property>
       </Properties>
       <Events>
@@ -133,7 +133,7 @@
     <Component class="javax.swing.JButton" name="salir">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/cerrar (2).png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\cerrar (2).png"/>
         </Property>
       </Properties>
       <Events>
@@ -148,7 +148,7 @@
     <Component class="javax.swing.JLabel" name="jLabel1">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/inicio.jpg"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\inicio.jpg"/>
         </Property>
       </Properties>
       <Constraints>
