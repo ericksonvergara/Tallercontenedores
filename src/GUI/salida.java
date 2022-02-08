@@ -127,7 +127,7 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(310, 70, 119, 14);
         getContentPane().add(cedula_paciente);
-        cedula_paciente.setBounds(138, 70, 150, 22);
+        cedula_paciente.setBounds(138, 70, 150, 20);
 
         nombre_paciente.setEditable(false);
         nombre_paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -136,18 +136,18 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_paciente);
-        nombre_paciente.setBounds(430, 70, 150, 22);
+        nombre_paciente.setBounds(430, 70, 150, 20);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Fecha de ingreso:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 110, 110, 14);
         getContentPane().add(fecha_ingreso);
-        fecha_ingreso.setBounds(138, 110, 150, 22);
+        fecha_ingreso.setBounds(138, 110, 150, 20);
 
         modificar.setText("Modificar");
         getContentPane().add(modificar);
-        modificar.setBounds(140, 330, 83, 25);
+        modificar.setBounds(140, 330, 75, 23);
 
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,14 +156,14 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(40, 330, 75, 25);
+        agregar.setBounds(40, 330, 71, 23);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Fecha de salida:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(310, 110, 100, 20);
         getContentPane().add(fecha_salida);
-        fecha_salida.setBounds(430, 110, 150, 22);
+        fecha_salida.setBounds(430, 110, 150, 20);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
@@ -181,7 +181,7 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(total);
-        total.setBounds(310, 230, 76, 22);
+        total.setBounds(310, 230, 76, 20);
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -190,11 +190,11 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(230, 330, 67, 25);
+        buscar.setBounds(230, 330, 65, 23);
 
         eliminar.setText("Eliminar");
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 330, 75, 25);
+        eliminar.setBounds(320, 330, 69, 23);
 
         enviar.setText("Mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,11 +203,11 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(410, 330, 73, 25);
+        enviar.setBounds(410, 330, 69, 23);
 
         exportar.setText("exportar");
         getContentPane().add(exportar);
-        exportar.setBounds(500, 330, 80, 25);
+        exportar.setBounds(500, 330, 80, 23);
 
         tabla_salida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +232,7 @@ public class salida extends javax.swing.JFrame {
 
         estado_paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Observacion", "Tratamiento", "U.C.I" }));
         getContentPane().add(estado_paciente);
-        estado_paciente.setBounds(450, 150, 130, 22);
+        estado_paciente.setBounds(450, 150, 130, 20);
 
         nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccione" }));
         nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
@@ -241,7 +241,9 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(140, 160, 150, 22);
+        nombre_doctor.setBounds(140, 160, 150, 20);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\fondosalida.jpg")); // NOI18N
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 630, 600);
 
@@ -328,7 +330,7 @@ public class salida extends javax.swing.JFrame {
             String cedula_doc = st.nextToken();
             String nom_doc = st.nextToken();
             
-            long tiempo_hospitalizado = fecha_ingreso.getDate().getTime()-fecha_salida.getDate().getTime();
+            long tiempo_hospitalizado = fecha_salida.getDate().getTime()-fecha_ingreso.getDate().getTime();
             long dias = tiempo_hospitalizado / (1000 * 60 * 60 * 24);
             
             String estps = (String) estado_paciente.getSelectedItem();

@@ -56,7 +56,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Areas);
-        Areas.setBounds(0, 200, 33, 9);
+        Areas.setBounds(0, 220, 80, 80);
 
         Paciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -64,7 +64,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Paciente);
-        Paciente.setBounds(0, 40, 33, 9);
+        Paciente.setBounds(0, 30, 80, 80);
 
         ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -72,7 +72,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(ingreso);
-        ingreso.setBounds(0, 290, 33, 9);
+        ingreso.setBounds(0, 310, 80, 80);
 
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -80,7 +80,7 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(salida);
-        salida.setBounds(0, 380, 33, 9);
+        salida.setBounds(0, 420, 80, 80);
 
         doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -88,15 +88,16 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(doctor);
-        doctor.setBounds(0, 120, 33, 9);
+        doctor.setBounds(0, 130, 80, 80);
 
+        salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\cerrar (2).png")); // NOI18N
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);
             }
         });
         getContentPane().add(salir);
-        salir.setBounds(530, 0, 33, 9);
+        salir.setBounds(530, 0, 90, 80);
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, -70, 630, 690);
 

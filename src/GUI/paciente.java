@@ -206,14 +206,14 @@ public class paciente extends javax.swing.JFrame {
     private void agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarActionPerformed
         try {
             // TODO add your handling code here:
-            int ced = Integer.parseInt(cedula.getText().trim());
+            long ced = Long.parseLong(cedula.getText().trim());
             String nom = nombre.getText().trim();
             int ed = Integer.parseInt(edad.getText().trim());
             long tel = Long.parseLong(telefono.getText().trim());
 
-            contenedor_paciente pac1 = new contenedor_paciente(ced, nom, ed, tel);
+            //contenedor_paciente pac1 = new contenedor_paciente(ced, nom, ed, tel);
 
-            pac.add(pac1);
+            //pac.add(pac1);
 
             Conexion con = new Conexion();
             con.ConexionPostgres();
@@ -334,10 +334,10 @@ public class paciente extends javax.swing.JFrame {
 
             while (rs.next()) {
                 model.insertRow(con1, new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-                model.setValueAt(rs.getInt("cedula_paciente"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getLong("cedula_paciente"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
                 model.setValueAt(rs.getString("nombre_paciente"), con1, 1);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
                 model.setValueAt(rs.getInt("edad_paciente"), con1, 2);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
-                model.setValueAt(rs.getInt("telefono_paciente"), con1, 3);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getLong("telefono_paciente"), con1, 3);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
             }
             /*
             for(int i =0; i<pac.size(); i++)
