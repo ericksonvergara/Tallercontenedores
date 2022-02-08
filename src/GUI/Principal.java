@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(626, 626));
         getContentPane().setLayout(null);
 
+        Areas.setText("areas");
         Areas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 AreasActionPerformed(evt);
@@ -58,6 +59,8 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Areas);
         Areas.setBounds(0, 220, 80, 80);
 
+        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente (3).png"))); // NOI18N
+        Paciente.setText("paciente");
         Paciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 PacienteActionPerformed(evt);
@@ -66,6 +69,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Paciente);
         Paciente.setBounds(0, 30, 80, 80);
 
+        ingreso.setText("ingreso");
         ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ingresoActionPerformed(evt);
@@ -74,6 +78,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(ingreso);
         ingreso.setBounds(0, 310, 80, 80);
 
+        salida.setText("salida");
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salidaActionPerformed(evt);
@@ -82,6 +87,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(salida);
         salida.setBounds(0, 420, 80, 80);
 
+        doctor.setText("doctor");
         doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 doctorActionPerformed(evt);
@@ -91,6 +97,7 @@ public class Principal extends javax.swing.JFrame {
         doctor.setBounds(0, 130, 80, 80);
 
         salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\cerrar (2).png")); // NOI18N
+        salir.setText("cerrar");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 salirActionPerformed(evt);

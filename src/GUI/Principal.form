@@ -56,6 +56,9 @@
   </Layout>
   <SubComponents>
     <Component class="javax.swing.JButton" name="Areas">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="areas"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="AreasActionPerformed"/>
       </Events>
@@ -66,6 +69,12 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="Paciente">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="3" name="/iconos/paciente (3).png"/>
+        </Property>
+        <Property name="text" type="java.lang.String" value="paciente"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="PacienteActionPerformed"/>
       </Events>
@@ -76,6 +85,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="ingreso">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="ingreso"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ingresoActionPerformed"/>
       </Events>
@@ -86,6 +98,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="salida">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="salida"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salidaActionPerformed"/>
       </Events>
@@ -96,6 +111,9 @@
       </Constraints>
     </Component>
     <Component class="javax.swing.JButton" name="doctor">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="doctor"/>
+      </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="doctorActionPerformed"/>
       </Events>
@@ -110,6 +128,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="2" name="C:\Users\SENA\Documents\Repositorio\Tallercontenedores\src\iconos\cerrar (2).png"/>
         </Property>
+        <Property name="text" type="java.lang.String" value="cerrar"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="salirActionPerformed"/>
