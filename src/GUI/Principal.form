@@ -57,6 +57,9 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="Areas">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\area .png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="areas"/>
       </Properties>
       <Events>
@@ -71,7 +74,7 @@
     <Component class="javax.swing.JButton" name="Paciente">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/iconos/paciente (3).png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\paciente (3).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="paciente"/>
       </Properties>
@@ -86,6 +89,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="ingreso">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\ingreso .png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="ingreso"/>
       </Properties>
       <Events>
@@ -99,6 +105,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="salida">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\salida .png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="salida"/>
       </Properties>
       <Events>
@@ -112,6 +121,9 @@
     </Component>
     <Component class="javax.swing.JButton" name="doctor">
       <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\doctor .png"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="doctor"/>
       </Properties>
       <Events>
@@ -126,7 +138,7 @@
     <Component class="javax.swing.JButton" name="salir">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="2" name="C:\Users\SENA\Documents\Repositorio\Tallercontenedores\src\iconos\cerrar (2).png"/>
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\cerrar (2).png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="cerrar"/>
       </Properties>
@@ -135,11 +147,16 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="530" y="0" width="90" height="80"/>
+          <AbsoluteConstraints x="550" y="10" width="70" height="60"/>
         </Constraint>
       </Constraints>
     </Component>
     <Component class="javax.swing.JLabel" name="jLabel1">
+      <Properties>
+        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+          <Image iconType="2" name="C:\Users\ERICK\Documents\NetBeansProjects\Tallercontenedores\src\iconos\inicio.jpg"/>
+        </Property>
+      </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
           <AbsoluteConstraints x="0" y="-70" width="630" height="690"/>

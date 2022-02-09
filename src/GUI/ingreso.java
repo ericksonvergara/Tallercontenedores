@@ -5,6 +5,12 @@
 package GUI;
 import static GUI.paciente.pac;
 import static GUI.paciente.pac2;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -180,7 +186,8 @@ public class ingreso extends javax.swing.JFrame {
             ResultSet rs = con.consultar(query);
 
             if (rs.next()) {
-                nombre.setText(rs.getString("nombre_paciente"));                
+                nombre.setText(rs.getString("nombre_paciente"));
+                JOptionPane.showMessageDialog(this, "Busqueda Exitosa!");
             } else {
                 JOptionPane.showMessageDialog(this, "No existe el Paciente!");
             }
@@ -320,16 +327,68 @@ public class ingreso extends javax.swing.JFrame {
     }//GEN-LAST:event_enviarActionPerformed
 
     private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
-        // TODO add your handling code here:
-         // TODO add your handling code here:
-        String cad="Cedula \t Nombre \t Fecha de ingreso \n";
-        
-        for(int i =0; i<ingreso.size(); i++){
-        contenedor_ingreso ingr = (contenedor_ingreso)ingreso.get(i);
-        cad+= ingr.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingr.getFecha_ingreso()) + "\n";    
-     }
-     
-        Archivo.grabar("ingreso.xls", cad);
+        try {
+            // TODO add your handling code here:
+            // TODO add your handling code here:
+//        String cad="Cedula \t Nombre \t Fecha de ingreso \n";
+//        
+//        for(int i =0; i<ingreso.size(); i++){
+//        contenedor_ingreso ingr = (contenedor_ingreso)ingreso.get(i);
+//        cad+= ingr.getCedula() + "\t" + pac2.getNombre() + "\t" + formato1.format(ingr.getFecha_ingreso()) + "\n";    
+//     }
+
+            Document documento = new Document();
+            String ruta = System.getProperty("user.home");
+
+            try {
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/reporte_ingreso.pdf"));
+                } catch (DocumentException ex) {
+                    Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            documento.open();
+            PdfPTable tabla_ingreso = new PdfPTable(3);
+            tabla_ingreso.addCell("Cedula");
+            tabla_ingreso.addCell("Nombre");
+            tabla_ingreso.addCell("Fecha Ingreso");
+            
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM ingreso";
+            java.sql.ResultSet rs = con.consultar(query);
+            
+            if(rs.next()){
+                while(rs.next()){
+                    tabla_ingreso.addCell(rs.getString(1));
+                    tabla_ingreso.addCell(rs.getString(2));
+                    tabla_ingreso.addCell(rs.getString(3));
+                }
+                
+                try {
+                    documento.add(tabla_ingreso);
+                } catch (DocumentException ex) {
+                    Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            con.cerrar();
+            documento.close();
+            JOptionPane.showMessageDialog(this, "Reporte Creado!.");
+
+            //Archivo.grabar("ingreso.xls", cad);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(ingreso.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_exportarActionPerformed
 
     /**
@@ -357,7 +416,7 @@ public class ingreso extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(ingreso.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-      
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

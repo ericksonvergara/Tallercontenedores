@@ -50,6 +50,7 @@ public class Principal extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(626, 626));
         getContentPane().setLayout(null);
 
+        Areas.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\area .png")); // NOI18N
         Areas.setText("areas");
         Areas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -59,7 +60,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Areas);
         Areas.setBounds(0, 220, 80, 80);
 
-        Paciente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/iconos/paciente (3).png"))); // NOI18N
+        Paciente.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\paciente (3).png")); // NOI18N
         Paciente.setText("paciente");
         Paciente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +70,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(Paciente);
         Paciente.setBounds(0, 30, 80, 80);
 
+        ingreso.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\ingreso .png")); // NOI18N
         ingreso.setText("ingreso");
         ingreso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -78,6 +80,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(ingreso);
         ingreso.setBounds(0, 310, 80, 80);
 
+        salida.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\salida .png")); // NOI18N
         salida.setText("salida");
         salida.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -87,6 +90,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(salida);
         salida.setBounds(0, 420, 80, 80);
 
+        doctor.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\doctor .png")); // NOI18N
         doctor.setText("doctor");
         doctor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -96,7 +100,7 @@ public class Principal extends javax.swing.JFrame {
         getContentPane().add(doctor);
         doctor.setBounds(0, 130, 80, 80);
 
-        salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\cerrar (2).png")); // NOI18N
+        salir.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\cerrar (2).png")); // NOI18N
         salir.setText("cerrar");
         salir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -104,7 +108,9 @@ public class Principal extends javax.swing.JFrame {
             }
         });
         getContentPane().add(salir);
-        salir.setBounds(530, 0, 90, 80);
+        salir.setBounds(550, 10, 70, 60);
+
+        jLabel1.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\inicio.jpg")); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, -70, 630, 690);
 

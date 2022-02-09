@@ -89,7 +89,6 @@ public class doctor extends javax.swing.JFrame {
         agregar = new javax.swing.JButton();
         modificar = new javax.swing.JButton();
         buscar = new javax.swing.JButton();
-        eliminar = new javax.swing.JButton();
         enviar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabla_doctor = new javax.swing.JTable();
@@ -147,7 +146,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 98, 20);
+        tipo.setBounds(190, 130, 111, 22);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
@@ -161,7 +160,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 20);
+        area_d.setBounds(190, 160, 80, 22);
 
         agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregar.setText("agregar");
@@ -193,16 +192,6 @@ public class doctor extends javax.swing.JFrame {
         getContentPane().add(buscar);
         buscar.setBounds(207, 190, 70, 25);
 
-        eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        eliminar.setText("eliminar");
-        eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminarActionPerformed(evt);
-            }
-        });
-        getContentPane().add(eliminar);
-        eliminar.setBounds(315, 190, 80, 25);
-
         enviar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         enviar.setText("mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -211,7 +200,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(83, 230, 80, 25);
+        enviar.setBounds(300, 190, 80, 25);
 
         tabla_doctor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -237,7 +226,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exportar);
-        exportar.setBounds(240, 230, 90, 25);
+        exportar.setBounds(300, 230, 90, 25);
         getContentPane().add(jLabel7);
         jLabel7.setBounds(-10, 0, 460, 0);
 
@@ -467,8 +456,11 @@ public class doctor extends javax.swing.JFrame {
         } catch (FileNotFoundException ex) {
             Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        String titulo = "Reporte Doctor!.";
 
         documento.open();
+        
         PdfPTable tabla = new PdfPTable(5);
         tabla.addCell("Cedula");
         tabla.addCell("Nombre");
@@ -526,6 +518,7 @@ public class doctor extends javax.swing.JFrame {
                 telefono.setText(rs.getString("telefono_doctor"));
                 tipo.setSelectedItem(rs.getString("tipo_doctor"));
                 area_d.setSelectedItem(rs.getString("especialidad_doctor"));
+                JOptionPane.showMessageDialog(this, "Busqueda Exitosa!.");
             } else {
                 JOptionPane.showMessageDialog(null, "No existen datos!", "ERROR", JOptionPane.ERROR_MESSAGE);
             }
@@ -567,32 +560,6 @@ public class doctor extends javax.swing.JFrame {
     private void nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombreActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_nombreActionPerformed
-
-    private void eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminarActionPerformed
-        // TODO add your handling code here:       
-         try {
-            int fila = tabla_doctor.getSelectedRow();
-            String cod = "";
-            cod = tabla_doctor.getValueAt(fila, 0).toString();
-
-            Conexion con = new Conexion();
-            con.ConexionPostgres();
-            String query = "DELETE FROM docotr WHERE cedula_doctor =" + Integer.parseInt(cedula.getText()) + "";
-            JOptionPane.showMessageDialog(this, "El registro ha sido Eliminado!");
-            con.eliminar(query);
-            con.cerrar();
-
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            Logger.getLogger(doctor.class.getName()).log(Level.SEVERE, null, ex);
-        }
-      
-    }//GEN-LAST:event_eliminarActionPerformed
     
     /**
      * @param args the command line arguments
@@ -634,7 +601,6 @@ public class doctor extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> area_d;
     private javax.swing.JButton buscar;
     private javax.swing.JTextField cedula;
-    private javax.swing.JButton eliminar;
     private javax.swing.JButton enviar;
     private javax.swing.JButton exportar;
     private javax.swing.JLabel jLabel1;

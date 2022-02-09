@@ -253,6 +253,7 @@ public class area extends javax.swing.JFrame {
 
             if (rs.next()) {
                 nombreArea.setText(rs.getString("especialidad_area"));
+                JOptionPane.showMessageDialog(this, "Busqueda Exitosa!.");
             } else {
                 JOptionPane.showMessageDialog(this, "No existe el Area!");
             }

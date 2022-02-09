@@ -13,6 +13,12 @@ import static GUI.ingreso.ingreso;
 import static GUI.ingreso.ingreso2;
 import static GUI.paciente.pac;
 import static GUI.paciente.pac2;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.DateFormat;
@@ -127,7 +133,7 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(310, 70, 119, 14);
         getContentPane().add(cedula_paciente);
-        cedula_paciente.setBounds(138, 70, 150, 20);
+        cedula_paciente.setBounds(138, 70, 150, 22);
 
         nombre_paciente.setEditable(false);
         nombre_paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -136,18 +142,18 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_paciente);
-        nombre_paciente.setBounds(430, 70, 150, 20);
+        nombre_paciente.setBounds(430, 70, 150, 22);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Fecha de ingreso:");
         getContentPane().add(jLabel4);
         jLabel4.setBounds(20, 110, 110, 14);
         getContentPane().add(fecha_ingreso);
-        fecha_ingreso.setBounds(138, 110, 150, 20);
+        fecha_ingreso.setBounds(138, 110, 150, 22);
 
         modificar.setText("Modificar");
         getContentPane().add(modificar);
-        modificar.setBounds(140, 330, 75, 23);
+        modificar.setBounds(140, 330, 83, 25);
 
         agregar.setText("Agregar");
         agregar.addActionListener(new java.awt.event.ActionListener() {
@@ -156,14 +162,14 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(40, 330, 71, 23);
+        agregar.setBounds(40, 330, 75, 25);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Fecha de salida:");
         getContentPane().add(jLabel5);
         jLabel5.setBounds(310, 110, 100, 20);
         getContentPane().add(fecha_salida);
-        fecha_salida.setBounds(430, 110, 150, 20);
+        fecha_salida.setBounds(430, 110, 150, 22);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
@@ -181,7 +187,7 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(total);
-        total.setBounds(310, 230, 76, 20);
+        total.setBounds(310, 230, 76, 22);
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -190,11 +196,11 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(230, 330, 65, 23);
+        buscar.setBounds(230, 330, 67, 25);
 
         eliminar.setText("Eliminar");
         getContentPane().add(eliminar);
-        eliminar.setBounds(320, 330, 69, 23);
+        eliminar.setBounds(320, 330, 75, 25);
 
         enviar.setText("Mostrar");
         enviar.addActionListener(new java.awt.event.ActionListener() {
@@ -203,11 +209,16 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(410, 330, 69, 23);
+        enviar.setBounds(410, 330, 73, 25);
 
         exportar.setText("exportar");
+        exportar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                exportarActionPerformed(evt);
+            }
+        });
         getContentPane().add(exportar);
-        exportar.setBounds(500, 330, 80, 23);
+        exportar.setBounds(500, 330, 80, 25);
 
         tabla_salida.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -232,7 +243,7 @@ public class salida extends javax.swing.JFrame {
 
         estado_paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Observacion", "Tratamiento", "U.C.I" }));
         getContentPane().add(estado_paciente);
-        estado_paciente.setBounds(450, 150, 130, 20);
+        estado_paciente.setBounds(450, 150, 130, 22);
 
         nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccione" }));
         nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
@@ -241,9 +252,7 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(140, 160, 150, 20);
-
-        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\SENA\\Documents\\Repositorio\\Tallercontenedores\\src\\iconos\\fondosalida.jpg")); // NOI18N
+        nombre_doctor.setBounds(140, 160, 150, 22);
         getContentPane().add(jLabel11);
         jLabel11.setBounds(0, 0, 630, 600);
 
@@ -271,6 +280,7 @@ public class salida extends javax.swing.JFrame {
             if (rs.next()) {
                 nombre_paciente.setText(rs.getString("nombre_paciente"));
                 fecha_ingreso.setDate(rs.getDate("fecha_ingreso"));
+                JOptionPane.showMessageDialog(this, "Busqueda Exitosa!.");
             } else {
                 JOptionPane.showMessageDialog(this, "No existe el Paciente!");
             }
@@ -333,30 +343,27 @@ public class salida extends javax.swing.JFrame {
             long tiempo_hospitalizado = fecha_salida.getDate().getTime()-fecha_ingreso.getDate().getTime();
             long dias = tiempo_hospitalizado / (1000 * 60 * 60 * 24);
             
-            String estps = (String) estado_paciente.getSelectedItem();
+            String estado_pac = (String) estado_paciente.getSelectedItem();
             
             
-            if(estps.equals("Observacion")){
+            if(estado_pac.equals("Observacion")){
                  long total_dias=dias*50000;
                  String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
-                 JOptionPane.showMessageDialog(this, "registro Exitoso!");
-                 JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
+                 JOptionPane.showMessageDialog(this, "registro Exitoso!");                 
                  con.actualizar(query);
             }
             
-            if(estps.equals("Tratamiento")){
+            if(estado_pac.equals("Tratamiento")){
                 long total_dias=dias*100000;
                 String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
                 JOptionPane.showMessageDialog(this, "registro Exitoso!");
-                JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
                 con.actualizar(query);
             }
             
-            if(estps.equals("U.C.I")){
+            if(estado_pac.equals("U.C.I")){
                 long total_dias=dias*200000;                
                 String query = "INSERT INTO salida VALUES("+ced+",'"+nombre_paciente.getText()+"','"+sfecha+"','"+sfecha2+"','"+nom_doc+"','"+estado_paciente.getSelectedItem()+"',"+total_dias+")";
                 JOptionPane.showMessageDialog(this, "registro Exitoso!");
-                JOptionPane.showMessageDialog(this, "registro Exitoso!"+tiempo_hospitalizado);
                 con.actualizar(query);
             }
             
@@ -454,6 +461,72 @@ public class salida extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_enviarActionPerformed
+
+    private void exportarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_exportarActionPerformed
+        try {                                         
+            // TODO add your handling code here:
+            
+            Document documento = new Document();
+            String ruta = System.getProperty("user.home");
+
+            try {
+                try {
+                    PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Desktop/Reporte_salida.pdf"));
+                } catch (DocumentException ex) {
+                    Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            } catch (FileNotFoundException ex) {
+                Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            documento.open();
+            PdfPTable tabla_salida = new PdfPTable(7);
+            tabla_salida.addCell("Cedula Paciente");
+            tabla_salida.addCell("Nombre Paciente");
+            tabla_salida.addCell("Fecha de Ingreso");
+            tabla_salida.addCell("Fecha de Salida");
+            tabla_salida.addCell("Nombre Doctor");
+            tabla_salida.addCell("Estado Paciente");
+            tabla_salida.addCell("Valor a Pagar");
+
+            Conexion con = new Conexion();
+            con.ConexionPostgres();
+            String query = "SELECT * FROM salida";
+            java.sql.ResultSet rs = con.exportar(query);
+
+            if (rs.next()) {
+                while (rs.next()) {
+                    tabla_salida.addCell(rs.getString(1));
+                    tabla_salida.addCell(rs.getString(2));
+                    tabla_salida.addCell(rs.getString(3));
+                    tabla_salida.addCell(rs.getString(4));
+                    tabla_salida.addCell(rs.getString(5));
+                    tabla_salida.addCell(rs.getString(6));
+                    tabla_salida.addCell(rs.getString(7));
+                    
+                    try {
+                        documento.add(tabla_salida);
+                    } catch (DocumentException ex) {
+                        Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+
+                }
+            }
+            con.cerrar();
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte Creado!.");
+            
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(salida.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_exportarActionPerformed
 
     /**
      * @param args the command line arguments
