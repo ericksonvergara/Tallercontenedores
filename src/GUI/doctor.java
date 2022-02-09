@@ -251,7 +251,7 @@ public class doctor extends javax.swing.JFrame {
             String item1 = (String) tipo.getSelectedItem();
             if (item1.equals("Medico General")) {
 
-                String query = "insert into doctor values(" + Integer.parseInt(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Integer.parseInt(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + "0)";
+                String query = "insert into doctor values(" + Long.parseLong(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Long.parseLong(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + "0)";
                 JOptionPane.showMessageDialog(this, "Registro exitoso");
                 con.actualizar(query);
             }
@@ -259,7 +259,7 @@ public class doctor extends javax.swing.JFrame {
             String item2 = (String) tipo.getSelectedItem();
             if (item2.equals("Especialista")) {
 
-                String query = "insert into doctor values(" + Integer.parseInt(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Integer.parseInt(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + Integer.parseInt(codigoarea.trim()) + ")";
+                String query = "insert into doctor values(" + Long.parseLong(cedula.getText().trim()) + ",'" + nombre.getText().trim() + "'," + Long.parseLong(telefono.getText().trim()) + ",'" + tipo.getSelectedItem() + "'," + Integer.parseInt(codigoarea.trim()) + ")";
                 JOptionPane.showMessageDialog(this, "Registro exitoso");
                 con.actualizar(query);
             }
@@ -322,7 +322,7 @@ public class doctor extends javax.swing.JFrame {
             String item1 = (String) tipo.getSelectedItem();
             if (item1.equals("Medico General")) {
 
-                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Integer.parseInt(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=0 WHERE cedula_doctor =" + Integer.parseInt(cedula.getText().trim());
+                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Long.parseLong(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=0 WHERE cedula_doctor =" + Long.parseLong(cedula.getText().trim());
                 JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
                 con.actualizar(query);
             }
@@ -330,7 +330,7 @@ public class doctor extends javax.swing.JFrame {
             String item2 = (String) tipo.getSelectedItem();
             if (item2.equals("Especialista")) {
 
-                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Integer.parseInt(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=" + Integer.parseInt(codigoarea) + " WHERE cedula_doctor =" + Integer.parseInt(cedula.getText().trim());
+                String query = "UPDATE  doctor SET nombre_doctor='" + nombre.getText().trim() + "',telefono_doctor=" + Long.parseLong(telefono.getText().trim()) + ",tipo_doctor='" + tipo.getSelectedItem() + "'," + "especialidad_doctor=" + Integer.parseInt(codigoarea) + " WHERE cedula_doctor =" + Long.parseLong(cedula.getText().trim());
                 JOptionPane.showMessageDialog(this, "Modificación Exitosa!");
                 con.actualizar(query);
             }
@@ -367,9 +367,9 @@ public class doctor extends javax.swing.JFrame {
 
             while (rs.next()) {
                 model.insertRow(con1, new Object[]{}); //INSERTA FILA EN TIEMPO DE EJECUCION
-                model.setValueAt(rs.getInt("cedula_doctor"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
+                model.setValueAt(rs.getLong("cedula_doctor"), con1, 0);  // ACTUALIZA LA CELDA CON EL VALOR DE CAMPO OBTENIDO
                 model.setValueAt(rs.getString("nombre_doctor"), con1, 1);
-                model.setValueAt(rs.getInt("telefono_doctor"), con1, 2);
+                model.setValueAt(rs.getLong("telefono_doctor"), con1, 2);
                 model.setValueAt(rs.getString("tipo_doctor"), con1, 3);
                 model.setValueAt(rs.getInt("especialidad_doctor"), con1, 4);
 
@@ -504,7 +504,7 @@ public class doctor extends javax.swing.JFrame {
 
     private void buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscarActionPerformed
         // TODO add your handling code here:
-        int ced = Integer.parseInt(cedula.getText().trim());
+        long ced = Long.parseLong(cedula.getText().trim());
         //int tel = Integer.parseInt(telefono.getText().trim());
 
         try {
