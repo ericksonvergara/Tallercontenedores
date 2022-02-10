@@ -39,6 +39,7 @@ public class doctor extends javax.swing.JFrame {
      */
     public doctor() {
          initComponents();  
+         setLocationRelativeTo(null);
          
         try {
             Conexion con = new Conexion();
@@ -115,19 +116,19 @@ public class doctor extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel3.setText("Nombre:");
         getContentPane().add(jLabel3);
-        jLabel3.setBounds(119, 70, 60, 16);
+        jLabel3.setBounds(120, 80, 60, 16);
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Telefono:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(123, 100, 60, 16);
+        jLabel4.setBounds(120, 116, 60, 20);
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel5.setText("Tipo:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(138, 130, 40, 16);
+        jLabel5.setBounds(130, 150, 40, 16);
         getContentPane().add(cedula);
-        cedula.setBounds(190, 38, 77, 20);
+        cedula.setBounds(190, 28, 140, 30);
 
         nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -135,9 +136,9 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre);
-        nombre.setBounds(190, 68, 77, 20);
+        nombre.setBounds(190, 70, 140, 30);
         getContentPane().add(telefono);
-        telefono.setBounds(190, 98, 80, 20);
+        telefono.setBounds(190, 110, 140, 30);
 
         tipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Medico General", "Especialista" }));
         tipo.addActionListener(new java.awt.event.ActionListener() {
@@ -146,12 +147,12 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(tipo);
-        tipo.setBounds(190, 130, 111, 22);
+        tipo.setBounds(190, 150, 120, 22);
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel6.setText("Area:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(140, 160, 40, 16);
+        jLabel6.setBounds(130, 180, 40, 16);
 
         area_d.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione" }));
         area_d.addActionListener(new java.awt.event.ActionListener() {
@@ -160,7 +161,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(area_d);
-        area_d.setBounds(190, 160, 80, 22);
+        area_d.setBounds(180, 180, 130, 22);
 
         agregar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         agregar.setText("agregar");
@@ -170,7 +171,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(agregar);
-        agregar.setBounds(3, 190, 80, 25);
+        agregar.setBounds(10, 230, 80, 25);
 
         modificar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         modificar.setText("modificar");
@@ -180,7 +181,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(modificar);
-        modificar.setBounds(93, 190, 90, 25);
+        modificar.setBounds(110, 230, 90, 25);
 
         buscar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         buscar.setText("buscar");
@@ -190,7 +191,7 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(buscar);
-        buscar.setBounds(207, 190, 70, 25);
+        buscar.setBounds(230, 230, 70, 25);
 
         enviar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         enviar.setText("mostrar");
@@ -200,10 +201,14 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(enviar);
-        enviar.setBounds(300, 190, 80, 25);
+        enviar.setBounds(330, 230, 80, 25);
 
         tabla_doctor.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
@@ -226,9 +231,11 @@ public class doctor extends javax.swing.JFrame {
             }
         });
         getContentPane().add(exportar);
-        exportar.setBounds(300, 230, 90, 25);
+        exportar.setBounds(330, 190, 90, 25);
+
+        jLabel7.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\fondodoctor.jpg")); // NOI18N
         getContentPane().add(jLabel7);
-        jLabel7.setBounds(-10, 0, 460, 0);
+        jLabel7.setBounds(-10, 0, 460, 430);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

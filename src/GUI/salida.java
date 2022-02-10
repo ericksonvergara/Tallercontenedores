@@ -40,6 +40,7 @@ public class salida extends javax.swing.JFrame {
     public static java.util.ArrayList salida = new java.util.ArrayList();
     public static contenedor_salida salida2 = null;
     private DefaultTableModel model;
+   
     
     public static String patron = "dd/MMM/yyyy";
     public static String sfecha;
@@ -53,6 +54,8 @@ public class salida extends javax.swing.JFrame {
     public salida() {
         try {
             initComponents();
+             
+            setLocationRelativeTo(null);
             
             Conexion con = new Conexion();
             con.ConexionPostgres();
@@ -101,8 +104,6 @@ public class salida extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         fecha_salida = new com.toedter.calendar.JDateChooser();
         jLabel6 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        total = new javax.swing.JTextField();
         buscar = new javax.swing.JButton();
         eliminar = new javax.swing.JButton();
         enviar = new javax.swing.JButton();
@@ -115,7 +116,8 @@ public class salida extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setMinimumSize(new java.awt.Dimension(600, 600));
+        setMinimumSize(new java.awt.Dimension(680, 606));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel2.setFont(new java.awt.Font("Trebuchet MS", 0, 14)); // NOI18N
@@ -133,7 +135,7 @@ public class salida extends javax.swing.JFrame {
         getContentPane().add(jLabel3);
         jLabel3.setBounds(310, 70, 119, 14);
         getContentPane().add(cedula_paciente);
-        cedula_paciente.setBounds(138, 70, 150, 22);
+        cedula_paciente.setBounds(138, 62, 160, 30);
 
         nombre_paciente.setEditable(false);
         nombre_paciente.addActionListener(new java.awt.event.ActionListener() {
@@ -142,14 +144,14 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_paciente);
-        nombre_paciente.setBounds(430, 70, 150, 22);
+        nombre_paciente.setBounds(430, 62, 150, 30);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel4.setText("Fecha de ingreso:");
         getContentPane().add(jLabel4);
-        jLabel4.setBounds(20, 110, 110, 14);
+        jLabel4.setBounds(20, 120, 110, 14);
         getContentPane().add(fecha_ingreso);
-        fecha_ingreso.setBounds(138, 110, 150, 22);
+        fecha_ingreso.setBounds(140, 120, 160, 30);
 
         modificar.setText("Modificar");
         getContentPane().add(modificar);
@@ -167,27 +169,14 @@ public class salida extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setText("Fecha de salida:");
         getContentPane().add(jLabel5);
-        jLabel5.setBounds(310, 110, 100, 20);
+        jLabel5.setBounds(310, 120, 100, 20);
         getContentPane().add(fecha_salida);
-        fecha_salida.setBounds(430, 110, 150, 22);
+        fecha_salida.setBounds(430, 120, 160, 30);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setText("Nombre del Doctor:");
         getContentPane().add(jLabel6);
-        jLabel6.setBounds(20, 160, 108, 14);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setText("Valor a pagar");
-        getContentPane().add(jLabel10);
-        jLabel10.setBounds(180, 230, 80, 14);
-
-        total.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                totalActionPerformed(evt);
-            }
-        });
-        getContentPane().add(total);
-        total.setBounds(310, 230, 76, 22);
+        jLabel6.setBounds(20, 190, 108, 14);
 
         buscar.setText("Buscar");
         buscar.addActionListener(new java.awt.event.ActionListener() {
@@ -225,6 +214,9 @@ public class salida extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
             new String [] {
@@ -234,16 +226,16 @@ public class salida extends javax.swing.JFrame {
         jScrollPane2.setViewportView(tabla_salida);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(10, 390, 580, 120);
+        jScrollPane2.setBounds(10, 390, 640, 130);
 
         jLabel12.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel12.setText("Estado del paciente:");
         getContentPane().add(jLabel12);
-        jLabel12.setBounds(310, 150, 130, 15);
+        jLabel12.setBounds(310, 190, 130, 15);
 
         estado_paciente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione", "Observacion", "Tratamiento", "U.C.I" }));
         getContentPane().add(estado_paciente);
-        estado_paciente.setBounds(450, 150, 130, 22);
+        estado_paciente.setBounds(450, 180, 130, 30);
 
         nombre_doctor.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "seleccione" }));
         nombre_doctor.addActionListener(new java.awt.event.ActionListener() {
@@ -252,16 +244,14 @@ public class salida extends javax.swing.JFrame {
             }
         });
         getContentPane().add(nombre_doctor);
-        nombre_doctor.setBounds(140, 160, 150, 22);
+        nombre_doctor.setBounds(140, 180, 160, 30);
+
+        jLabel11.setIcon(new javax.swing.ImageIcon("C:\\Users\\ERICK\\Documents\\NetBeansProjects\\Tallercontenedores\\src\\iconos\\fondosalida.jpg")); // NOI18N
         getContentPane().add(jLabel11);
-        jLabel11.setBounds(0, 0, 630, 600);
+        jLabel11.setBounds(0, 0, 680, 606);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_totalActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_totalActionPerformed
 
     private void nombre_pacienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombre_pacienteActionPerformed
         // TODO add your handling code here:
@@ -574,7 +564,6 @@ public class salida extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser fecha_ingreso;
     private com.toedter.calendar.JDateChooser fecha_salida;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
@@ -587,6 +576,5 @@ public class salida extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> nombre_doctor;
     private javax.swing.JTextField nombre_paciente;
     private javax.swing.JTable tabla_salida;
-    private javax.swing.JTextField total;
     // End of variables declaration//GEN-END:variables
 }

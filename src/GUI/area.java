@@ -36,6 +36,7 @@ public class area extends javax.swing.JFrame {
      */
     public area() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -117,7 +118,7 @@ public class area extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Buscar);
-        Buscar.setBounds(213, 190, 70, 25);
+        Buscar.setBounds(220, 190, 70, 25);
 
         Eliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         Eliminar.setText("Eliminar");

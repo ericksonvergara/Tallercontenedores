@@ -48,6 +48,7 @@ public class ingreso extends javax.swing.JFrame {
      */
     public ingreso() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -78,6 +79,7 @@ public class ingreso extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
         setMinimumSize(new java.awt.Dimension(500, 450));
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -87,7 +89,7 @@ public class ingreso extends javax.swing.JFrame {
 
         fecha_i.setMinSelectableDate(new java.util.Date(-62135747899000L));
         getContentPane().add(fecha_i);
-        fecha_i.setBounds(227, 137, 73, 22);
+        fecha_i.setBounds(227, 129, 140, 30);
 
         jLabel2.setText("Fecha ingreso:");
         getContentPane().add(jLabel2);
@@ -97,7 +99,7 @@ public class ingreso extends javax.swing.JFrame {
         getContentPane().add(jLabel4);
         jLabel4.setBounds(10, 83, 43, 16);
         getContentPane().add(cedula);
-        cedula.setBounds(68, 80, 90, 20);
+        cedula.setBounds(68, 70, 90, 30);
 
         jLabel5.setText("Nombre:");
         getContentPane().add(jLabel5);

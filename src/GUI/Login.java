@@ -4,6 +4,10 @@
  */
 package GUI;
 
+import com.sun.tools.jdeps.Graph;
+import java.awt.Graphics;
+import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import metodo_SQL.metodos_SQL;
 
@@ -18,7 +22,7 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
-        setLocationRelativeTo(null);
+        
     }
     
     metodos_SQL metodos = new metodos_SQL();
@@ -193,4 +197,5 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField usuario;
     // End of variables declaration//GEN-END:variables
-}
+
+   }
